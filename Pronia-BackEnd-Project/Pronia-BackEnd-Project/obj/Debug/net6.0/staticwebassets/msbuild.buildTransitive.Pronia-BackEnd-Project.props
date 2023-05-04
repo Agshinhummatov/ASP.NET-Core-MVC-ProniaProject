@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Pronia-BackEnd-Project.props" />
+</Project>
