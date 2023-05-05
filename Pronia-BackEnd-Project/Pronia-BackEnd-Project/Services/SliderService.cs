@@ -15,9 +15,11 @@ namespace Pronia_BackEnd_Project.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<Slider>> GetAll()
-        {
-            return await _context.Sliders.Where(m => !m.SoftDelete).ToListAsync();
-        }
+        public async Task<IEnumerable<Slider>> GetAllAsync() => await _context.Sliders.Where(m => !m.SoftDelete).ToListAsync();
+
+        public async Task<Slider> GetByIdAsync(int id) => await _context.Sliders.FindAsync(id);
+
+
+
     }
 }

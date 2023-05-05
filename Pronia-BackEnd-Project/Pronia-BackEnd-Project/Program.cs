@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Pronia_BackEnd_Project.Data;
 using Pronia_BackEnd_Project.Services.Interfaces;
 using Pronia_BackEnd_Project.Services;
+using Pronia_BackEnd_Project.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,15 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 
 
 builder.Services.AddScoped<ISliderService,SliderService>();
+
+builder.Services.AddScoped<IAdvertisingService, AdvertisingService>();
+
+builder.Services.AddScoped<IClientService, ClientService>();
+
+builder.Services.AddScoped<IBrandService, BrandService>();
+
+builder.Services.AddScoped<IBlogService, BlogService>();
+
 
 
 var app = builder.Build();
