@@ -122,7 +122,7 @@
                     <a href="tel://+00-123-456-789">+00 123 456 789</a>
                   </div>
 
-                  <a href="index.html" class="header-logo">
+                  <a asp-controller="Home" asp-action="Index" class="header-logo">
                     <img src="~/assets/images/logo/dark.png" alt="Header Logo" />
                   </a>
 
@@ -199,7 +199,7 @@
                   <nav class="main-nav">
                     <ul>
                       <li class="drop-holder">
-                        <a href="index.html">Home</a>
+                          <a asp-controller="Home" asp-action="Index">Home</a>
                         <ul class="drop-menu">
                           <li>
                             <a href="index.html">Home One</a>
@@ -308,7 +308,7 @@
                         </ul>
                       </li>
                       <li class="drop-holder">
-                        <a href="blog.html">Blog</a>
+                         <a asp-controller="Blog" asp-action="Index">Blog</a>
                         <ul class="drop-menu">
                           <li>
                             <a href="blog-listview.html">Blog List View</a>
@@ -319,7 +319,7 @@
                         </ul>
                       </li>
                       <li>
-                        <a href="about.html">About Us</a>
+                        <a  asp-controller="About" asp-action="Index" >About Us</a>
                       </li>
                       <li class="drop-holder">
                         <a href="#">Pages</a>
@@ -333,7 +333,7 @@
                         </ul>
                       </li>
                       <li>
-                        <a href="contact.html">Contact Us</a>
+                        <a asp-controller="Contact" asp-action="Index">Contact Us</a>
                       </li>
                     </ul>
                   </nav>
@@ -476,7 +476,7 @@
                           </ul>
                         </li>
                         <li>
-                          <a href="about.html">About Us</a>
+                          <a  asp-controller="About" asp-action="Index">About Us</a>
                         </li>
                         <li class="drop-holder">
                           <a href="#">Pages</a>
@@ -490,7 +490,7 @@
                           </ul>
                         </li>
                         <li>
-                          <a href="contact.html">Contact Us</a>
+                          <a  asp-controller="Contact" asp-action="Index" >Contact Us</a>
                         </li>
                       </ul>
                     </nav>

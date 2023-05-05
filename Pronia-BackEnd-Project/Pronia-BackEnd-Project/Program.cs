@@ -1,3 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using Pronia_BackEnd_Project.Data;
+using Pronia_BackEnd_Project.Services.Interfaces;
+using Pronia_BackEnd_Project.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,7 +10,13 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddSession();
 
+builder.Services.AddDbContext<AppDbContext>(option =>
+{
+    option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));  
+});
 
+
+builder.Services.AddScoped<ISliderService,SliderService>();
 
 
 var app = builder.Build();
@@ -20,13 +31,13 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseStaticFiles(); //static fayllar uchun yeni jc css falan
+app.UseStaticFiles(); 
 
-app.UseSession(); // session istifade edeceyik
+app.UseSession(); 
 
 app.UseRouting();
 
-app.UseAuthentication(); // login edende ede bilsin deye yaziriq
+app.UseAuthentication(); 
 
 app.UseAuthorization();
 
