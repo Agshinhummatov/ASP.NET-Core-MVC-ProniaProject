@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Advertising>
+
+
+<!-- Begin Shipping Area -->
+<div class="shipping-area section-space-top-100">
+    <div class="container">
+        <div class="shipping-bg">
+            <div class="row shipping-wrap">
+                @foreach (var advertising in Model)
+                {
+                    <div class="col-lg-4 col-md-6">
+                        <div class="shipping-item">
+                            <div class="shipping-img">
+                                <img src="~/assets/images/website-images//@advertising.Image"
+                                 alt="Shipping Icon" />
+                            </div>
+                            <div class="shipping-content">
+                                <h2 class="title">@advertising.Name</h2>
+                                <p class="short-desc mb-0">@advertising.Description</p>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Shipping Area End Here -->

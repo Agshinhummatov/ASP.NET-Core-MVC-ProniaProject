@@ -28,6 +28,10 @@ builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<IBlogService, BlogService>();
 
 
+builder.Services.AddScoped<IProductService, ProductService>();
+
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+
 
 var app = builder.Build();
 

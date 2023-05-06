@@ -70,33 +70,7 @@
       <!-- Slider Area End Here -->
 
       <!-- Begin Shipping Area -->
-      <div class="shipping-area section-space-top-100">
-        <div class="container">
-          <div class="shipping-bg">
-            <div class="row shipping-wrap">
-                @foreach (var advertising in Model.Advertisings)
-                {
-                  <div class="col-lg-4 col-md-6">
-                  <div class="shipping-item">
-                  <div class="shipping-img">
-                    <img
-                      src="~/assets/images/website-images//@advertising.Image"
-                      alt="Shipping Icon"
-                    />
-                  </div>
-                  <div class="shipping-content">
-                    <h2 class="title">@advertising.Name</h2>
-                    <p class="short-desc mb-0">@advertising.Description</p>
-                  </div>
-                  </div>
-                </div>
-
-                }    
-    
-            </div>
-          </div>
-        </div>
-      </div>
+       @await Component.InvokeAsync("Advertising")
       <!-- Shipping Area End Here -->
 
       <!-- Begin Product Area -->
@@ -2645,36 +2619,12 @@
       </div>
       <!-- Testimonial Area End Here -->
 
+
+
+    
+      
       <!-- Begin Brand Area -->
-      <div class="brand-area section-space-bottom-100">
-        <div class="container">
-          <div
-            class="brand-bg"
-            data-bg-image="assets/images/website-images//1-1170x300.jpg"
-          >
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="swiper-container brand-slider">
-                  <div class="swiper-wrapper">
-                      @foreach (var item in Model.Brands)
-                       {         
-                            
-                        <div class="swiper-slide">
-                      <a class="brand-item" href="#">
-                        <img
-                          src="~/assets/images/website-images//@item.Image"
-                          alt="Brand Image"
-                        />
-                      </a>
-                    </div>
-                       }
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+         @await Component.InvokeAsync("Brand")
       <!-- Brand Area End Here -->
 
       <!-- Begin Blog Area -->
