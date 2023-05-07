@@ -9,5 +9,7 @@ namespace Pronia_BackEnd_Project.Services.Interfaces
 
         Task<Product> GetFullDataByIdAsync(int id);
 
+
+
     }
 }

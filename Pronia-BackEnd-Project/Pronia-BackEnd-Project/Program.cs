@@ -33,6 +33,13 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 
+builder.Services.AddScoped<IColorService, ColorService>();
+
+
+builder.Services.AddScoped<ITagService, TagService>();
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -11,11 +11,17 @@ namespace Pronia_BackEnd_Project.Controllers
 
         private readonly ICategoryService _categoryService;
 
-        public ShopController(IProductService productService, ICategoryService categoryService)
+        private readonly IColorService _colorService;
+
+        private readonly ITagService _tagService;
+
+        public ShopController(IProductService productService, ICategoryService categoryService, IColorService colorService, ITagService tagService)
         {
 
             _productService = productService;
             _categoryService = categoryService;
+            _colorService = colorService;
+            _tagService = tagService;
         }
         public async Task<IActionResult> Index()
         {
@@ -24,10 +30,17 @@ namespace Pronia_BackEnd_Project.Controllers
 
             IEnumerable<Category> categories = await _categoryService.GetAllAsync();
 
+            IEnumerable<Color> colors = await _colorService.GetAllAsync();
+
+            IEnumerable<Tag> tags = await _tagService.GetAllAsync();
+
             ShopVM model = new()
             {
                 Products = products,
-                Categories = categories
+                Categories = categories,
+                Colors = colors,
+                Tags = tags
+
 
             };
 
