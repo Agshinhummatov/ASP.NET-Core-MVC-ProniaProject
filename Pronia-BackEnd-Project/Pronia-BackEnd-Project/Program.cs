@@ -38,6 +38,8 @@ builder.Services.AddScoped<IColorService, ColorService>();
 
 builder.Services.AddScoped<ITagService, TagService>();
 
+builder.Services.AddScoped<IBannerService, BannerService>();
+
 
 
 var app = builder.Build();

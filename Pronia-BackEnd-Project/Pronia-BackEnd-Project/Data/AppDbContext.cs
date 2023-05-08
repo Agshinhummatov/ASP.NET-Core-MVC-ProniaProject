@@ -39,6 +39,8 @@ namespace Pronia_BackEnd_Project.Data
 
         public DbSet<ProductImage> ProductImages { get; set; }
 
+        public DbSet<Banner> Banners { get; set; }
+
 
 
 

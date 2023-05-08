@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "aJ2B55vST/eAAUzYx10ybj56GcrznW0n3B5uiI+EdrM=",
+  "Hash": "4x4D1PT6mCM8JffIKXyymaaoGOW6bdj/3e6bmedgbXo=",
   "Source": "Pronia-BackEnd-Project",
   "BasePath": "_content/Pronia-BackEnd-Project",
   "Mode": "Default",
@@ -2990,6 +2990,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\js\\plugins\\wow.min.js"
+    },
+    {
+      "Identity": "C:\\Users\\User-BT\\Desktop\\End-lahiye\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\wwwroot\\assets\\js\\product.js",
+      "SourceId": "Pronia-BackEnd-Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User-BT\\Desktop\\End-lahiye\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\wwwroot\\",
+      "BasePath": "_content/Pronia-BackEnd-Project",
+      "RelativePath": "assets/js/product.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\js\\product.js"
     },
     {
       "Identity": "C:\\Users\\User-BT\\Desktop\\End-lahiye\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\wwwroot\\assets\\js\\vendor\\bootstrap.bundle.min.js",

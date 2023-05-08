@@ -1,4 +1,5 @@
-﻿using Pronia_BackEnd_Project.Models;
+﻿using Pronia_BackEnd_Project.Helpers;
+using Pronia_BackEnd_Project.Models;
 
 namespace Pronia_BackEnd_Project.ViewModels
 {
@@ -14,7 +15,11 @@ namespace Pronia_BackEnd_Project.ViewModels
         public IEnumerable<Tag> Tags { get; set; }
 
 
+        public Paginate<Product> PaginatedDatas { get; set; }
 
-       
+
+
+
+
     }
 }

@@ -12,6 +12,9 @@ namespace Pronia_BackEnd_Project.ViewModels
        
 
         public IEnumerable<Blog> Blogs { get; set; }
+        public IEnumerable<Banner> Banners { get; set; }
+
+        public IEnumerable<Product> Product { get; set; }
 
     }
 }
