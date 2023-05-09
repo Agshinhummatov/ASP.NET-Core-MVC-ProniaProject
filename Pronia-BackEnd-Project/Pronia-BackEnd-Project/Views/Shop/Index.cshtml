@@ -111,12 +111,12 @@
                         </div>
                         <div class="banner-item widgets-banner img-hover-effect">
                             <div class="banner-img">
-                                <img src="~/assets/images/website-images/1-270x300.webp"
+                                <img src="~/assets/images/website-images/@Model.Banners.FirstOrDefault(m=> !m.IsLarge)?.Image"
                                      alt="Banner Image" />
                             </div>
                             <div class="banner-content text-position-center">
-                                <span class="collection">New Collection</span>
-                                <h3 class="title">Plant Port</h3>
+                                <span class="collection">@Model.Banners.FirstOrDefault(m=> !m.IsLarge).Title</span>
+                                <h3 class="title">@Html.Raw(Model.Banners.FirstOrDefault(m=> !m.IsLarge).Name)</h3>
                                 <div class="button-wrap">
                                     <a class="btn btn-custom-size sm-size btn-pronia-primary"
                                        href="#">Shop Now</a>

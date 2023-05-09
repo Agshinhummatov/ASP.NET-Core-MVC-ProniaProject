@@ -140,7 +140,7 @@
                     <div class="col-xl-3 col-md-4 col-sm-6">
                       <div class="product-item">
                         <div class="product-img">
-                          <a href="shop.html">
+                           <a  asp-controller="Shop" asp-action="Detail" asp-route-id="@product.Id">
                             <img
                               class="primary-img"
                                                  src="~/assets/images/website-images//@product.ProductImages?.Where(m => m.IsMain).FirstOrDefault()?.Image"
@@ -248,7 +248,7 @@
                                 <div class="col-xl-3 col-md-4 col-sm-6">
                                     <div class="product-item">
                                         <div class="product-img">
-                                            <a href="shop.html">
+                                            <a asp-controller="Shop" asp-action="Detail" asp-route-id="@product.Id" >
                                                 <img class="primary-img"
                                                  src="~/assets/images/website-images//@product.ProductImages?.Where(m => m.IsMain).FirstOrDefault()?.Image"
                                                  alt="Product Images" />
@@ -337,14 +337,14 @@
                   <div class="product-item-wrap row">
 
 
-                            @foreach (var product in Model.Product.OrderByDescending(m => m.Created).Take(8))
+                            @foreach (var product in Model.Product.OrderByDescending(m => m.Created).Take(4))
                             {
 
 
                                 <div class="col-xl-3 col-md-4 col-sm-6">
                                     <div class="product-item">
                                         <div class="product-img">
-                                            <a href="shop.html">
+                                            <a asp-controller="Shop" asp-action="Detail" asp-route-id="@product.Id">
                                                 <img class="primary-img"
                                                  src="~/assets/images/website-images//@product.ProductImages?.Where(m => m.IsMain).FirstOrDefault()?.Image"
                                                  alt="Product Images" />
@@ -542,17 +542,17 @@
             <div class="col-lg-12">
               <div class="swiper-container product-slider">
 
-                  @foreach (var product in Model.Product.OrderByDescending(m =>m.Created).Take(4))
-                   {
+                
                         
                     
-                <div class="swiper-wrapper">
+                      <div class="swiper-wrapper">
                    
-                        
+                        @foreach (var product in Model.Product.OrderByDescending(m => m.Created).Take(4))
+                        {
 
-                  <div class="swiper-slide product-item">
+                            <div class="swiper-slide product-item">
                     <div class="product-img">
-                      <a href="shop.html">
+                      <a asp-controller="Shop" asp-action="Detail" asp-route-id="@product.Id">
                         <img
                           class="primary-img"
                                          src="~/assets/images/website-images//@product.ProductImages?.Where(m => m.IsMain).FirstOrDefault()?.Image"
@@ -638,10 +638,10 @@
                       </div>
                     </div>
                   </div>
-
+                  }
                   
                 </div>
-                  }
+                  
 
               </div>
             </div>
@@ -738,20 +738,20 @@
                                             </ul>
                                         </div>
                                         <h2 class="title">
-                                            <a asp-controller="Blog" asp-action="Index">@blog.Title</a>
+                                            <a asp-controller="Blog" asp-action="Detail" asp-route-id="@blog.Id">@blog.Title</a>
                                         </h2>
                                         <p class="short-desc mb-7">
                                            @blog.Desciption
                                         </p>
                                     </div>
                                     <div class="blog-img img-hover-effect">
-                                        <a asp-controller="Blog" asp-action="Index">
+                                        <a asp-controller="Blog" asp-action="Detail" asp-route-id="@blog.Id">
                                             <img class="img-full"
                                              src="~/assets/images/website-images/@blog.Images.FirstOrDefault(m => m.IsMain)?.Image"
                                              alt="Blog Image" />
                                         </a>
                                         <div class="inner-btn-wrap">
-                                            <a class="inner-btn" asp-controller="Blog" asp-action="Index">
+                                            <a class="inner-btn" asp-controller="Blog" asp-action="Detail" asp-route-id="@blog.Id">
                                                 <i class="pe-7s-link"></i>
                                             </a>
                                         </div>

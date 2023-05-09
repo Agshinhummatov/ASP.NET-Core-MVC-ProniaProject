@@ -15,7 +15,7 @@
 
                 <div class="product-item">
                     <div class="product-img">
-                        <a asp-action="Detail" asp-route-id="@product.Id">
+                        <a  asp-action="Detail" asp-route-id="@product.Id">
                             <img class="primary-img"
                              src="~/assets/images/website-images/@product.ProductImages?.Where(m => m.IsMain).FirstOrDefault()?.Image"
                              alt="Product Images" />

@@ -13,6 +13,7 @@ namespace Pronia_BackEnd_Project.ViewModels
         public IEnumerable<Color> Colors { get; set; }
 
         public IEnumerable<Tag> Tags { get; set; }
+        public IEnumerable<Banner> Banners { get; set; } 
 
 
         public Paginate<Product> PaginatedDatas { get; set; }

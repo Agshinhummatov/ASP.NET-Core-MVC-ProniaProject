@@ -40,6 +40,7 @@ namespace Pronia_BackEnd_Project.Controllers
             IEnumerable<Slider> sliders = await _sliderService.GetAllAsync();
          
             IEnumerable<Client> clients = await _clientService.GetAllAsync();
+
             IEnumerable<Banner> banners = await _bannerService.GetAllAsync();
          
 

@@ -8,6 +8,6 @@ namespace Pronia_BackEnd_Project.Services.Interfaces
 
         Task<Blog> GetByIdAsync(int id);
 
-        Task<Blog> GetFullDataById(int id);
+        Task<Blog> GetFullDataByIdAsync(int id);
     }
 }
