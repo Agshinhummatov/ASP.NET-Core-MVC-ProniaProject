@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Pronia_BackEnd_Project.Helpers;
 using Pronia_BackEnd_Project.Models;
 using Pronia_BackEnd_Project.Services;
 using Pronia_BackEnd_Project.Services.Interfaces;
@@ -15,20 +16,26 @@ namespace Pronia_BackEnd_Project.Controllers
 
         private readonly ITagService _tagService;
 
-       private readonly IBannerService _bannerService;
+        private readonly IBannerService _bannerService;
+
+        private readonly IProductService _productService;
 
 
 
-        public BlogController(IBlogService blogService, ICategoryService categoryService, ITagService tagService  ,IBannerService bannerService)
+
+        public BlogController(IBlogService blogService,
+                            ICategoryService categoryService, 
+                            ITagService tagService  ,IBannerService bannerService, IProductService productService)
         {
             _blogService = blogService;
             _categoryService = categoryService;
              _tagService = tagService;
             _bannerService = bannerService;
+            _productService = productService;
 
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1, int take = 2)
         {
             IEnumerable<Banner> banners = await _bannerService.GetAllAsync();
 
@@ -38,14 +45,29 @@ namespace Pronia_BackEnd_Project.Controllers
 
             IEnumerable<Tag> tags = await _tagService.GetAllAsync();
 
+            int productsCount = await _productService.GetCountAsync();
+
+            
+
+            IEnumerable<Blog> dbproducts = await _blogService.GetPaginatedDatas(page, take);
+
+
+            int pageCount = await GetPageCountAsync(take);
+
+
+            Paginate<Blog> paginatedDatas = new(dbproducts, page, pageCount);
+
 
             BlogVM model = new()
             {
-                Blogs = blogs,
+               
                 Categories = categories,
                 Tags = tags,
-                Banners = banners
+                Banners = banners,
+                ProductsCount = productsCount,
+                PaginatedDatas = paginatedDatas,
 
+                Blogs = blogs
             };
 
             return View(model);
@@ -55,6 +77,15 @@ namespace Pronia_BackEnd_Project.Controllers
 
 
 
+        private async Task<int> GetPageCountAsync(int take)
+        {
+            var productCount = await _blogService.GetCountAsync();  // bu methoda mene productlarin countunu verir
+            return (int)Math.Ceiling((decimal)productCount / take);     /// burda bolurki  product conutumzun nece dene take edirikse o qederde gosdersin yeni asqqidaki 1 2 3 yazir onlarin sayini tapmaq ucun 
+
+
+        }
+
+
         [HttpGet]
         public async Task<IActionResult> Detail(int? id)
         {
@@ -62,6 +93,10 @@ namespace Pronia_BackEnd_Project.Controllers
             if (id is null) return BadRequest();
 
             Blog blog = await _blogService.GetFullDataByIdAsync((int)id);
+
+            if (blog is null) return NotFound();
+
+             int productsCount = await _productService.GetCountAsync();
 
             IEnumerable<Blog> blogAll = await _blogService.GetAllAsync();
 
@@ -73,7 +108,7 @@ namespace Pronia_BackEnd_Project.Controllers
 
              IEnumerable<Category> categories = await _categoryService.GetAllAsync();
 
-            if (blog is null) return NotFound();
+           
 
             return View(new BlogDetailVM   // view gonderirik bunlari 
             {
@@ -87,7 +122,8 @@ namespace Pronia_BackEnd_Project.Controllers
                 Tags = tags,
                 Categories = categories,
                 Created = blog.Created,
-                Banners = banners
+                Banners = banners,
+                ProductsCount = productsCount
 
 
             });

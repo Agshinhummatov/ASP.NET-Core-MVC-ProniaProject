@@ -20,7 +20,9 @@ namespace Pronia_BackEnd_Project.ViewModels
         public string Sku { get; set; }
 
         public string Information { get; set; }
-       
+
+        public IEnumerable<Advertising> Advertisings { get; set; }
+
 
         public ICollection<ProductImage> ProductImages { get; set; }
 

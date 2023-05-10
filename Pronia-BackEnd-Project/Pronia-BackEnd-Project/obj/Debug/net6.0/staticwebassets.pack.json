@@ -1077,6 +1077,10 @@
       "PackagePath": "staticwebassets\\assets\\scss\\style.scss"
     },
     {
+      "Id": "C:\\Users\\User-BT\\Desktop\\End-lahiye\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\wwwroot\\templates\\verify.html",
+      "PackagePath": "staticwebassets\\templates\\verify.html"
+    },
+    {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.Pronia-BackEnd-Project.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

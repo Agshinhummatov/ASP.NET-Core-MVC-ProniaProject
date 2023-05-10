@@ -9,6 +9,8 @@ namespace Pronia_BackEnd_Project.ViewModels
 
         public string Desciption { get; set; }
 
+        public int ProductsCount { get; set; }
+
         public ICollection<BlogImage> Images { get; set; }
 
         public IEnumerable<Blog> BlogAll { get; set; } 

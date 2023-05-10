@@ -157,42 +157,24 @@
                             </li>
                         </ul>
                         <ul class="service-item-wrap">
+
+                           @foreach (var advertising in Model.Advertisings)
+                            {
+                                
+                            
                             <li class="service-item">
+
                                 <div class="service-img">
-                                    <img src="~/assets/images/website-images/car.png"
+                                    <img src="~/assets/images/website-images/@advertising.Image"
                                          alt="Shipping Icon" />
                                 </div>
                                 <div class="service-content">
                                     <span class="title">
-                                        Free <br />
-                                        Shipping
+                                       @advertising.Name
                                     </span>
                                 </div>
                             </li>
-                            <li class="service-item">
-                                <div class="service-img">
-                                    <img src="~/assets/images/website-images/card.png"
-                                         alt="Shipping Icon" />
-                                </div>
-                                <div class="service-content">
-                                    <span class="title">
-                                        Safe <br />
-                                        Payment
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="service-item">
-                                <div class="service-img">
-                                    <img src="~/assets/images/website-images/service.png"
-                                         alt="Shipping Icon" />
-                                </div>
-                                <div class="service-content">
-                                    <span class="title">
-                                        Safe <br />
-                                        Payment
-                                    </span>
-                                </div>
-                            </li>
+                            }
                         </ul>
                         <div class="product-category">
                             <span class="title">SKU:</span>
@@ -228,7 +210,7 @@
                                     
                                 
                                 <li>
-                                    <a href="#">@item.Tag.Name</a>
+                                    <a href="#">@item.Tag.Name </a>
                                 </li>
 
                                 }

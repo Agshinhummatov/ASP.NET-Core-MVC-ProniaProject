@@ -1,0 +1,63 @@
+﻿@model RegisterVM
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+
+
+<!-- Begin Main Content Area -->
+<main class="main-content">
+
+    <div class="login-register-area section-space-y-axis-100">
+        <div class="container">
+            <div class="row">
+
+                <div class="ol-lg-12 pt-5 pt-lg-0">
+                    <div class="text-danger" asp-validation-summary="All"></div>
+                    <form method="post" asp-action="Register">
+                        <div class="login-form">
+                            <h4 class="login-title">Register</h4>
+                            <div class="row">
+                                <div class="col-md-6 col-12">
+                                    <label>First Name</label>
+                                    <input  asp-for="FirstName" placeholder="First Name" />
+                                    <span class="text-danger" asp-validation-for="FirstName"></span>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <label>Last Name</label>
+                                    <input asp-for="LastName" placeholder="Last Name" />
+                                </div>
+
+                                <div class="col-md-6 col-12">
+                                    <label>UserName</label>
+                                    <input asp-for="Username" placeholder="UserName" />
+                                </div>
+                                <div class="col-md-12">
+                                    <label>Email Address*</label>
+                                    <input asp-for="Email" placeholder="Email Address" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Password</label>
+                                    <input asp-for="Password" placeholder="Password" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Confirm Password</label>
+                                    <input asp-for="ConfirmPassword" placeholder="Confirm Password" />
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn btn-custom-size lg-size btn-pronia-primary">
+                                        Register
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- Main Content Area End Here -->
+

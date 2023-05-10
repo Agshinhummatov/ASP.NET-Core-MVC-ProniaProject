@@ -1,4 +1,4 @@
-﻿@model BlogDetailVM 
+﻿@model BlogDetailVM
 
 @{
     ViewData["Title"] = "BlogDetail";
@@ -48,7 +48,7 @@
                                     <li>
                                         <a href="#">
                                             <i class="fa fa-chevron-right"></i>
-                                            All <span>(65)</span>
+                                            All <span>(@Model.ProductsCount)</span>
                                         </a>
                                     </li>
 
@@ -68,37 +68,36 @@
                                 <h2 class="widgets-title mb-4">Recent Post</h2>
                                 <div class="swiper-container widgets-list-slider">
                                     <div class="swiper-wrapper">
-                                        
-                                          @foreach (var blog in Model.BlogAll)
-                            {
-                                            
-                                        
-                          <div class="swiper-slide">
-                            <div class="widgets-list-item">
-                              <div class="widgets-list-img">
-                                <a asp-action="Detail" asp-route-id="@blog.Id">
-                                  <img 
-                                    class="img-full"
-                                       src="~/assets/images/website-images/@blog.Images.FirstOrDefault(m => m.IsMain)?.Image"
-                                       alt="Blog Images"
-                                  />
-                                </a>
-                              </div>
-                              <div class="widgets-list-content">
-                                <div class="widgets-meta">
-                                  <ul>
-                                <li class="date">@blog.Created.ToString("dd MMMM yyyy")</li>
-                                   </ul>
-                                </div>
-                                <h2 class="title mb-0">
-                                  <a href="#">@blog.Title</a>
-                                </h2>
-                              </div>
-                            </div>
-                          </div>
-                        
 
-                          }
+                                        @foreach (var blog in Model.BlogAll)
+                                        {
+
+
+                                            <div class="swiper-slide">
+                                                <div class="widgets-list-item">
+                                                    <div class="widgets-list-img">
+                                                        <a asp-action="Detail" asp-route-id="@blog.Id">
+                                                            <img class="img-full"
+                                                             src="~/assets/images/website-images/@blog.Images.FirstOrDefault(m => m.IsMain)?.Image"
+                                                             alt="Blog Images" />
+
+                                                        </a>
+                                                    </div>
+                                                    <div class="widgets-list-content">
+                                                        <div class="widgets-meta">
+                                                            <ul>
+                                                                <li class="date">@blog.Created.ToString("dd MMMM yyyy")</li>
+                                                            </ul>
+                                                        </div>
+                                                        <h2 class="title mb-0">
+                                                            <a href="#">@blog.Title</a>
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        }
 
                                     </div>
                                 </div>
@@ -112,7 +111,7 @@
                                     {
                                         <li> <a href="#">@tag.Name</a></li>
                                     }
-                                
+
                                 </ul>
                             </div>
                         </div>
@@ -146,12 +145,12 @@
                             </div>
                             <h2 class="title"> @Model.Title </h2>
                             <p class="short-desc">
-                               @Model.Desciption
+                                @Model.Desciption
                             </p>
                         </div>
                         <div class="blog-img img-hover-effect">
 
-                            
+
                             <img class="img-full"
                                  src="~/assets/images/website-images/@Model.Images.FirstOrDefault(m => m.IsMain)?.Image"
                                  alt="Blog Image" />

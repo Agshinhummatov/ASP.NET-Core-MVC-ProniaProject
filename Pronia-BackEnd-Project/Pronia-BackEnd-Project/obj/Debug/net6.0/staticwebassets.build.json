@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4x4D1PT6mCM8JffIKXyymaaoGOW6bdj/3e6bmedgbXo=",
+  "Hash": "QL7Z4PHXP6uj8AbHD/x67QiMx1vUf1Kb6NWeduq3Yfo=",
   "Source": "Pronia-BackEnd-Project",
   "BasePath": "_content/Pronia-BackEnd-Project",
   "Mode": "Default",
@@ -4605,6 +4605,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\scss\\style.scss"
+    },
+    {
+      "Identity": "C:\\Users\\User-BT\\Desktop\\End-lahiye\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\wwwroot\\templates\\verify.html",
+      "SourceId": "Pronia-BackEnd-Project",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\User-BT\\Desktop\\End-lahiye\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\wwwroot\\",
+      "BasePath": "_content/Pronia-BackEnd-Project",
+      "RelativePath": "templates/verify.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\templates\\verify.html"
     }
   ]
 }

@@ -20,6 +20,8 @@ $(document).on("click", ".categoriesName", function (e) {
 
             $(".product-list").html(res)
 
+            console.log(res)
+
 
         }
     })

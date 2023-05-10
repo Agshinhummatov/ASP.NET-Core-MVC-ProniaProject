@@ -25,8 +25,16 @@ namespace Pronia_BackEnd_Project.Controllers
 
         private readonly IBannerService _bannerService;
 
+        private readonly IAdvertisingService _advertisingService;
 
-        public ShopController(IProductService productService, ICategoryService categoryService, IColorService colorService, ITagService tagService, AppDbContext context, IBannerService bannerService)
+
+        public ShopController(IProductService productService, 
+            ICategoryService categoryService,
+            IColorService colorService,
+            ITagService tagService,
+            AppDbContext context,
+            IBannerService bannerService, 
+            IAdvertisingService advertisingService)
         {
 
             _productService = productService;
@@ -35,6 +43,7 @@ namespace Pronia_BackEnd_Project.Controllers
             _tagService = tagService;
             _context = context;
             _bannerService = bannerService;
+            _advertisingService = advertisingService;
         }
         public async Task<IActionResult> Index(int page = 1, int take = 5)
         {
@@ -52,7 +61,7 @@ namespace Pronia_BackEnd_Project.Controllers
 
             IEnumerable<Product> dbproducts = await _productService.GetPaginatedDatas(page, take); //page ve take gonderirik icine hemin methoda yazilibdi Servicde orda qebul edecik 
 
-      
+
 
             IEnumerable<Product> products = await _productService.GetAllAsync();
             int pageCount = await GetPageCountAsync(take); //paglerin sayin gosderir methodu asaqida yazmisiq 
@@ -95,6 +104,7 @@ namespace Pronia_BackEnd_Project.Controllers
             if (id is null) return BadRequest();
 
 
+            IEnumerable<Advertising> advertisings = await _advertisingService.GetAllAsync();
 
             Product product = await _productService.GetFullDataByIdAsync((int)id);
 
@@ -117,6 +127,7 @@ namespace Pronia_BackEnd_Project.Controllers
                 ProductColors = product.ProductColors,
                 ProductSize = product.ProductSize,
                 ProductTags = product.ProductTags,
+                Advertisings = advertisings
                
 
             });
@@ -126,16 +137,21 @@ namespace Pronia_BackEnd_Project.Controllers
         }
 
 
+
         [HttpGet]
-        public async Task<IActionResult> GetCategoryProducts(int? id)
+        public async Task<IActionResult> GetCategoryProducts(int? id , int page = 1, int take = 5)
         {
             if (id == null) return BadRequest();
 
-            var products = await _context.ProductCategories.Where(m => m.Category.Id == id).Include(m =>m.Product).ThenInclude(m =>m.ProductImages).Select(m => m.Product).ToListAsync();
+            var products = await _context.ProductCategories.Where(m => m.Category.Id == id).Include(m =>m.Product).ThenInclude(m =>m.ProductImages).Select(m => m.Product).Skip((page * take) - take).Take(take).ToListAsync();
 
+            //IEnumerable<Product> dbproducts = await _productService.GetPaginatedDatas(page, take);
 
+            int pageCount = await GetPageCountAsync(take);
 
-            return PartialView("_ProductsPartial", products);
+            Paginate<Product> paginate = new(products, page, pageCount);
+
+            return PartialView("_ProductsPartial", paginate);
         }
 
 

@@ -20,5 +20,22 @@ namespace Pronia_BackEnd_Project.Services
 
         public async Task<Blog> GetFullDataByIdAsync(int id) => await _context.Blogs.Include(m => m.Images).Include(m => m.Author)?.FirstOrDefaultAsync(m => m.Id == id);
 
+
+
+
+        public async Task<IEnumerable<Blog>> GetPaginatedDatas(int page, int take)  //bu method seyfeye uygun olaraq (int page ) data bazadan (int take) qeder datani gpturub gelir 
+        {
+            return await _context.Blogs.Include(m => m.Images).Include(m => m.Author)?.Skip((page * take) - take).Take(take).ToListAsync();
+
+
+        }
+
+
+
+        public async Task<int> GetCountAsync()   // productlarin sayini tapmaq ucun yazdiqimiz methodur adinda Async vermisiki asixron olsun
+        {
+            return await _context.Blogs.CountAsync(); // CountAsync() ssitemin verdiyi methodur
+        }
+
     }
 }

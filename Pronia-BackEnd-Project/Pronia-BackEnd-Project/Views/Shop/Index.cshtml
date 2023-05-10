@@ -167,9 +167,13 @@
                         </ul>
                     </div>
                     <div class="tab-content product-list">
-                        <partial name="_ProductsPartial" model="@Model.PaginatedDatas.Datas" />
+
+                        <partial name="_ProductsPartial" model="@Model.PaginatedDatas" />
+
+
                     </div>
-                    <div class="pagination-area">
+
+                 
                        @* <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-center">
                                 <li class="page-item active">
@@ -187,28 +191,9 @@
                             </ul>
                         </nav>*@
 
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item @(Model.PaginatedDatas.HasPrevious? "":"disabled")">
-                                    @* @(Model.HasPrevious ? "":"disabled") bu neynir *@
-                                    <a class="page-link" asp-action="Index" asp-route-page="@(Model.PaginatedDatas.CurrentPage - 1)" tabindex="-1">Previous</a>  @*  asp-route-page="@(Model.CurrentPage - 1) bu neynir gedir olduqu seyfeden  cixiram biri yeni cilikdende  geri getsin*@
-                                </li>
+                      
 
-                                @for (int i = 1; i <= Model.PaginatedDatas.TotalPage; i++) @*//  Model.TotalPage ne qederide o qederde firlansin  paglerim sayini gosderir yeni 1 2 3 4 necedenidirse onu gosderir*@
-                                {
-                                    <li class="page-item @(Model.PaginatedDatas.CurrentPage == i ? "disabled":"")"><a class="page-link" asp-action="Index" asp-route-page="@i">@i</a></li>  @*// asp-route-page="@i" neynir pagimize i gnderir yeni hansi seyfede odluqnu*@
-
-                                    @* // @(Model.CurrentPage == i) bu o demekdirki hansina basmisamsa o seyfeni versin mene  ? "disabled":"" bu neyir if di yoxlayirki eger i dedirse yeni odluqu page versin mene ve disabled edib ustune clik etmek olmasin daha sonra basqa seyferlri ise "" qoymusuqki digerlerini disabled eleemsin*@
-                                }
-
-                                <li class="page-item @(Model.PaginatedDatas.HasNext? "":"disabled")">
-                                    <a class="page-link"  asp-action="Index" asp-route-page="@(Model.PaginatedDatas.CurrentPage + 1)">Next</a>   @* asp-route-page="@(Model.CurrentPage + 1) yeni clikinde uzerine gelsin novbeti seyfeni versin*@
-                                </li>
-                            </ul>
-                        </nav>
-
-
-                    </div>
+                   
                 </div>
             </div>
         </div>
