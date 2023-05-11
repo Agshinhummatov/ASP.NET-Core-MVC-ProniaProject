@@ -70,6 +70,9 @@ builder.Services.AddScoped<ITagService, TagService>();
 
 builder.Services.AddScoped<IBannerService, BannerService>();
 
+builder.Services.AddScoped<ITeamService, TeamService>();
+
+
 builder.Services.AddScoped<IEmailService, EmailService>(); // email confrim ucundur
 
 
@@ -98,6 +101,13 @@ app.UseRouting();
 app.UseAuthentication(); 
 
 app.UseAuthorization();
+
+
+app.MapControllerRoute(
+      name: "areas",
+      pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+
 
 
 app.MapControllerRoute(

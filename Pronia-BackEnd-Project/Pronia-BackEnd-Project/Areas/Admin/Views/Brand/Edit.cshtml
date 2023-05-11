@@ -1,0 +1,32 @@
+﻿@model BrandEditVM
+
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<div class="container my-5">
+<h2 style="color:darkcyan; text-align:center;" class="mt-3"> Brand edit</h2>
+    <div class="slider-content my-5">
+        <img src="~/assets/images/website-images/@Model.Image" style="width:150px; height:150px;" />
+    </div>
+    <form class="form-sample" asp-action="Edit" method="post" enctype="multipart/form-data">
+
+        <input class="form-control" id="customFile" asp-for="Photo" />
+        <span class="text-danger" asp-validation-for="Photo"></span>
+        <div class="buttons my-3">
+           <button type="submit" class="btn btn-primary mr-2">Submit</button>
+           <a class="btn btn-light" asp-action="Index">Cancel</a>
+        </div>
+
+    </form>
+
+</div>
+
+
+@section Scripts{
+
+    <partial name="_ValidationScriptsPartial" />
+
+}

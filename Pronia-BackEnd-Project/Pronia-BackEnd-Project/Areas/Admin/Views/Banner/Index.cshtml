@@ -1,0 +1,57 @@
+﻿
+
+
+@model IEnumerable<Banner>
+
+@{
+    ViewData["Title"] = "Slider";
+}
+
+
+<div class="container my-5">
+    <a class="btn btn-success" style="float: right;" asp-action="Create">Create</a>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Image
+                    </th>
+                   
+                  
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var banner in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="~/assets/images/website-images//@banner.Image" style="width:80px; height:80px;" alt="image" />
+                        </td>
+
+                        <td data-id="@banner.Id">
+                        
+
+                        </td>
+
+                        <td>
+
+                            <a class="btn btn-outline-info" asp-action="Detail" asp-route-id="@banner.Id">Info</a>
+                            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@banner.Id">Edit</a>
+                            <form style="display: inline-block;" asp-action="Delete" asp-route-id="@banner.Id" method="post">
+                                <button type="submit" class="btn btn-outline-danger">Delete</button>
+                            </form>
+
+                        </td>
+
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+
+</div>

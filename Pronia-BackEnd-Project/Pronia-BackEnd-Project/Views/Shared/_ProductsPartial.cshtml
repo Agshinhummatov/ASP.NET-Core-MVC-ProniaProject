@@ -111,7 +111,7 @@
 
         @for (int i = 1; i <= Model.TotalPage; i++) @*//  Model.TotalPage ne qederide o qederde firlansin  paglerim sayini gosderir yeni 1 2 3 4 necedenidirse onu gosderir*@
         {
-            <li class="page-item @(Model.CurrentPage == i ? "disabled":"")"><a class="page-link" asp-action="Index" asp-route-page="@i">@i</a></li>  @*// asp-route-page="@i" neynir pagimize i gnderir yeni hansi seyfede odluqnu*@
+            <li class="page-item @(Model.CurrentPage == i ? "disabled":"")"><a class="page-link" asp-controller="Shop" asp-action="Index" asp-route-id="@ViewBag.cateId" asp-route-page="@i">@i</a></li>  @*// asp-route-page="@i" neynir pagimize i gnderir yeni hansi seyfede odluqnu*@
 
             @* // @(Model.CurrentPage == i) bu o demekdirki hansina basmisamsa o seyfeni versin mene  ? "disabled":"" bu neyir if di yoxlayirki eger i dedirse yeni odluqu page versin mene ve disabled edib ustune clik etmek olmasin daha sonra basqa seyferlri ise "" qoymusuqki digerlerini disabled eleemsin*@
         }

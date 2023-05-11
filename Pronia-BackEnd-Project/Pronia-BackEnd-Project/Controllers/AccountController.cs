@@ -53,7 +53,7 @@ namespace Pronia_BackEnd_Project.Controllers
                 //FullName = model.FullName,
             };
 
-            IdentityResult result = await _userManager.CreateAsync(newUser, model.Password); // passwordu colden ediriki onu haslaya bilsin yeni kodlari baxmaq olmur 
+            IdentityResult result = await _userManager.CreateAsync(newUser, model.Password); 
 
 
             if (!result.Succeeded)
@@ -66,32 +66,7 @@ namespace Pronia_BackEnd_Project.Controllers
                 return View(model);
             }
 
-            //string token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser); // bizim ucun token yaradir bu
-
-            //// link duzletmleyik hemin linkede gedende yeni click edende gelmelidir bizim hanisa methodumuza  ConfirmEmail() yeni bu methoda
-
-            //string link = Url.Action(nameof(ConfirmEmail), "Account", new { userId = newUser.Id, token = token },Request.Scheme,Request.Host.ToString());  // bu ureldi cilikc edende gedecek menim  ConfirmEmail() methoduma ve  menden controlorun adini isdeyir oda Account daha sonra menden Id ile token isdeyir Request.Scheme- bu htpps// olmaqini gosderir, Request.Host.ToString() - bu ise domain adini sene gosderir
-
-            //// bu yuxardaki urlde qoyaciq a nin hrfene yeni emaile gonderecik
-
-
-            //// create email message
-            //var email = new MimeMessage();
-            //email.From.Add(MailboxAddress.Parse("from_address@example.com")); // hansi adresden gedecek mail basqalarina yeni burda siketinde maili ola biler
-            //email.To.Add(MailboxAddress.Parse(newUser.Email)); // kime gedecek mail hansi maile gedecek 
-            //email.Subject = "Register confirmation";   // basliqdir bu
-            //email.Body = new TextPart(TextFormat.Html) { Text = $"<a href='{link}'> Go to fiorello </a>" };  // mesjimiz bu olacaq
-
-            //// send email
-            //using var smtp = new SmtpClient();  // using qirilmar qalmasin arxa fonda qapzcollectir isleyir
-            //smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);  //SecureSocketOptions.StartTls datlarin tehlukesiz sekilde getmeyi ucundur
-            //smtp.Authenticate("agshinshh@code.edu.az", "rgopemrifktafndl");   // rgopemrifktafndl googleden kopyaladiqimiz kodu qoyuruq bura //  agshinshh@code.edu.az bu ise hansi maildan gedecek mesaj odur
-            //smtp.Send(email);
-            //smtp.Disconnect(true);
-
-            //return RedirectToAction(nameof(VerifyEmail));
-
-
+           
 
 
             string token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);

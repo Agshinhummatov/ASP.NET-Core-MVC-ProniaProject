@@ -45,10 +45,8 @@ namespace Pronia_BackEnd_Project.Controllers
             _bannerService = bannerService;
             _advertisingService = advertisingService;
         }
-        public async Task<IActionResult> Index(int page = 1, int take = 5)
+        public async Task<IActionResult> Index(int page = 1, int take = 5, int? id = null )
         {
-
-
             IEnumerable<Banner> banners = await _bannerService.GetAllAsync();
 
             IEnumerable<Category> categories = await _categoryService.GetAllAsync();
@@ -57,22 +55,31 @@ namespace Pronia_BackEnd_Project.Controllers
 
             IEnumerable<Tag> tags = await _tagService.GetAllAsync();
 
+            int pageCount=0;
+
+            if (id != null)
+            {
+
+                pageCount =  await GetPageCounByCategoryIdtAsync(take,id);
+
+            }
+            else
+            {
+                 pageCount = await GetPageCountAsync(take);
+
+            }
 
 
             IEnumerable<Product> dbproducts = await _productService.GetPaginatedDatas(page, take); //page ve take gonderirik icine hemin methoda yazilibdi Servicde orda qebul edecik 
 
-
-
-            IEnumerable<Product> products = await _productService.GetAllAsync();
-            int pageCount = await GetPageCountAsync(take); //paglerin sayin gosderir methodu asaqida yazmisiq 
+            //IEnumerable<Product> products = await _productService.GetAllAsync();
 
             Paginate<Product> paginatedDatas = new(dbproducts, page, pageCount);  /// methodumuz bir generice cixartmisiq Paginate bunda her yerde istifade edecik methoda bizden 1 ci datani isdeyir mappedDatas, 2 ci page yeni curet page  3 cu ise totalPage paglerin sayini gosderen methodu gonderirik icine
 
-            ViewBag.take = take;
 
             ShopVM model = new()
             {
-                Products = products,
+                //Products = products,
                 Categories = categories,
                 Colors = colors,
                 Tags = tags,
@@ -95,6 +102,28 @@ namespace Pronia_BackEnd_Project.Controllers
             
         }
 
+
+        private async Task<int> GetPageCounByCategoryIdtAsync(int take, int? id)
+        {
+            var productCount = await GetProductCountByIDAsync((int)id);  // bu methoda mene productlarin countunu verir
+            return (int)Math.Ceiling((decimal)productCount / take);     /// burda bolurki  product conutumzun nece dene take edirikse o qederde gosdersin yeni asqqidaki 1 2 3 yazir onlarin sayini tapmaq ucun 
+
+        }
+
+        private async Task<int> GetProductCountByIDAsync(int catergoryId)
+        {
+
+
+            //int prodCnt = await _context.Products.Include(m=> m.ProductCategories).ThenInclude(m => m.Category;
+
+            int prodCnt = await _context.ProductCategories.
+                Include(m =>m.Product)
+                .Where(m => m.Category.Id == catergoryId)
+                .Select(m=>m.Product).CountAsync();
+
+            return prodCnt;
+
+        }
       
 
 
@@ -143,11 +172,13 @@ namespace Pronia_BackEnd_Project.Controllers
         {
             if (id == null) return BadRequest();
 
-            var products = await _context.ProductCategories.Where(m => m.Category.Id == id).Include(m =>m.Product).ThenInclude(m =>m.ProductImages).Select(m => m.Product).Skip((page * take) - take).Take(take).ToListAsync();
+            var products = await _context.ProductCategories.Where(m => m.Category.Id == id).Include(m =>m.Product).ThenInclude(m =>m.ProductImages).Select(m => m.Product)/*.Skip((page * take) - take).Take(take)*/.ToListAsync();
+
+            ViewBag.cateId=id;
 
             //IEnumerable<Product> dbproducts = await _productService.GetPaginatedDatas(page, take);
 
-            int pageCount = await GetPageCountAsync(take);
+            int pageCount = await GetPageCounByCategoryIdtAsync(take, id);
 
             Paginate<Product> paginate = new(products, page, pageCount);
 

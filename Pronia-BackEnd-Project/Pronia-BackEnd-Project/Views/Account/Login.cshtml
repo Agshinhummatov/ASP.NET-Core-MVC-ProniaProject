@@ -1,4 +1,6 @@
-﻿
+﻿@model LoginVM
+
+
 @{
     ViewData["Title"] = "Login";
 }
@@ -12,17 +14,20 @@
 
 
                     <div class="col-lg-12">
-                        <form action="#">
+                        <div class="text-danger" asp-validation-summary="All"></div>
+                        <form method="post" asp-action="Login">
                             <div class="login-form">
                                 <h4 class="login-title">Login</h4>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <label>Email Address*</label>
-                                        <input type="email" placeholder="Email Address" />
+                                        <input asp-for="EmailOrUsername" placeholder="Email Address" />
+                                        <span class="text-danger" asp-validation-for="EmailOrUsername"></span>
                                     </div>
                                     <div class="col-lg-12">
                                         <label>Password</label>
-                                        <input type="password" placeholder="Password" />
+                                        <input asp-for="Password" placeholder="Password" />
+                                        <span class="text-danger" asp-validation-for="Password"></span>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="check-box">
@@ -53,6 +58,13 @@
 </main>
 
 
+@section Scripts{
 
+
+    <partial name="_ValidationScriptsPartial" />
+
+
+
+}
 
 
