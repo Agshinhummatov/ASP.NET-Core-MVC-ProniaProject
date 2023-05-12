@@ -1,0 +1,73 @@
+﻿@model BlogEditVM
+
+@{
+    ViewData["Title"] = "Edit";
+
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-description">
+                            Blog
+                        </p>
+                        <div class="my-3 ">
+                            @foreach (var item in Model.Images)
+                            {
+                                <img src="~/assets/images/website-images/@item.Image" style="width:150px; height:150px" alt="Alternate Text" />
+                            }
+                        </div>
+                        <form asp-controller="Blog" asp-action="Edit" enctype="multipart/form-data" class="forms-sample" method="post">
+                            <div class="form-group">
+                                <label asp-for="Title"></label>
+                                <input class="form-control" asp-for="Title">
+                                <span asp-validation-for="Title" class="text-danger my-1"></span>
+                            </div>
+                            <div class="form-group">
+
+                                <label style="color:darkred" class="mt-2">Description </label>
+                                <textarea class="form-control" id="category-text" asp-for="Description" rows="5"></textarea>
+                                <span class="text-danger" asp-validation-for="Description"></span>
+                            </div>
+
+                        
+                            <div class="form-group">
+                                <label asp-for="AuthorId">Authors</label>
+                                <select class="form-control" asp-for="AuthorId" asp-items="@ViewBag.author"></select>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Photos">Photos</label>
+                                <input class="form-control" asp-for="Photos">
+                                <span asp-validation-for="Photos" class="text-danger my-1"></span>
+                            </div>
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                            <a asp-action="Index" class="btn btn-light">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts{
+
+
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace("category-text")  //checkeditor qosanda mutleq bildirmeliyem burdaki getsin yuxardaki areani deyiij
+
+
+    </script>
+
+}
+
+

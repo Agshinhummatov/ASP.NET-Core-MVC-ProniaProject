@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User-BT\\Desktop\\End-lahiye\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project.csproj": {}
+    "C:\\Users\\User-BT\\Desktop\\back-project\\Asp-End-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User-BT\\Desktop\\End-lahiye\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project.csproj": {
+    "C:\\Users\\User-BT\\Desktop\\back-project\\Asp-End-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User-BT\\Desktop\\End-lahiye\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project.csproj",
+        "projectUniqueName": "C:\\Users\\User-BT\\Desktop\\back-project\\Asp-End-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project.csproj",
         "projectName": "Pronia-BackEnd-Project",
-        "projectPath": "C:\\Users\\User-BT\\Desktop\\End-lahiye\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project.csproj",
+        "projectPath": "C:\\Users\\User-BT\\Desktop\\back-project\\Asp-End-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project.csproj",
         "packagesPath": "C:\\Users\\User-BT\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User-BT\\Desktop\\End-lahiye\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\obj\\",
+        "outputPath": "C:\\Users\\User-BT\\Desktop\\back-project\\Asp-End-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
