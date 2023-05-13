@@ -93,9 +93,6 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
             {
                 
 
-                
-
-
                 ViewBag.author = await GetAuthorsAsync();
 
                 if (!ModelState.IsValid)

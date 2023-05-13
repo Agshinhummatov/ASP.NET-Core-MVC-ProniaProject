@@ -14,7 +14,7 @@ namespace Pronia_BackEnd_Project.Services
         }
 
 
-        public async Task<IEnumerable<Color>> GetAllAsync() => await _context.Colors.Include(m => m.ProductColors).ThenInclude(m =>m.Product).Where(m => !m.SoftDelete).ToListAsync();
+        public async Task<IEnumerable<Color>> GetAllAsync() => await _context.Colors.Include(m => m.ProductColors).ThenInclude(m =>m.Product).Where(m => !m.SoftDelete)?.ToListAsync();
 
         public async Task<Color> GetByIdAsync(int id) => await _context.Colors.FindAsync(id);
 
