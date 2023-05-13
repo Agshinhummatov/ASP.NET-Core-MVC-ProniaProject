@@ -72,10 +72,11 @@ builder.Services.AddScoped<IBannerService, BannerService>();
 
 builder.Services.AddScoped<ITeamService, TeamService>();
 
+builder.Services.AddScoped<IAuthorService, AuthorService>();
+
+builder.Services.AddScoped<ISettingsService, SettingsService>();
 
 builder.Services.AddScoped<IEmailService, EmailService>(); // email confrim ucundur
-
-
 
 builder.Services.AddScoped<EmailSettings>();
 

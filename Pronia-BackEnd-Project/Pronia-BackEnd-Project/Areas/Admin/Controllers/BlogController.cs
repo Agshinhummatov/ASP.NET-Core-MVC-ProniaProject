@@ -30,7 +30,7 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
         {
             IEnumerable<Blog> blogs = await _blogService.GetPaginatedDatas(page, take); 
 
-           IEnumerable<BlogListVM> mappedDatas = GetMappedDatas(blogs);
+            IEnumerable<BlogListVM> mappedDatas = GetMappedDatas(blogs);
 
             int pageCount = await GetPageCountAsync(take); 
 
@@ -93,7 +93,7 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
             {
                 
 
-                //ViewBag.categories = new SelectList(categories, "Id", "Name");  //httpPost methodunda yazirkiqki frumuz submit olanda yeni refresh olanda hemin seletimiz ordan getmesin view bag ile gonderirik datani
+                
 
 
                 ViewBag.author = await GetAuthorsAsync();
@@ -309,43 +309,35 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
 
 
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
+    
         public async Task<IActionResult> Delete(int? id)
         {
-            try
+            if (id == null) return BadRequest();
+
+            Blog product = await _blogService.GetFullDataByIdAsync((int)id);
+
+            if (product is null) return NotFound();
+
+
+            foreach (var item in product.Images)
             {
 
-                if (id == null) return BadRequest();
+                string path = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", item.Image);
 
-                Blog blog = await _blogService.GetFullDataByIdAsync((int)id);
+                FileHelper.DeleteFile(path);
 
-                if (blog is null) return NotFound();
-
-
-
-                foreach (var item in blog.Images)
-                {
-                    string path = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", item.Image);
-
-                    FileHelper.DeleteFile(path);
-
-                }
-
-                _context.Blogs.Remove(blog);
-
-                await _context.SaveChangesAsync();
-
-                return RedirectToAction(nameof(Index));
-
-            }
-            catch (Exception ex)
-            {
-
-                return RedirectToAction("Error", new { msj = ex.Message }); // eror mesajimizi diger seyfeye yoneldir "Error" yazdiqimiz indexe yoneldir
             }
 
 
+            _context.Blogs.Remove(product);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
 
         }
 

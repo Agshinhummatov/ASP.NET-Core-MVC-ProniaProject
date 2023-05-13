@@ -10,7 +10,7 @@ namespace Pronia_BackEnd_Project.Services.Interfaces
         Task<Product> GetFullDataByIdAsync(int id);
 
 
-        Task<IEnumerable<Product>> GetPaginatedDatas(int page, int take);
+        Task<List<Product>> GetPaginatedDatas(int page, int take);
 
 
         Task<int> GetCountAsync();

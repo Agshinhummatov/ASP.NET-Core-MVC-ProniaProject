@@ -40,7 +40,7 @@ namespace Pronia_BackEnd_Project.Services
 
 
 
-        public async Task<IEnumerable<Product>> GetPaginatedDatas(int page, int take)  //bu method seyfeye uygun olaraq (int page ) data bazadan (int take) qeder datani gpturub gelir 
+        public async Task<List<Product>> GetPaginatedDatas(int page, int take)  //bu method seyfeye uygun olaraq (int page ) data bazadan (int take) qeder datani gpturub gelir 
         {
             return await _context.Products.Include(m => m.ProductImages).
             Include(m => m.ProductCategories).

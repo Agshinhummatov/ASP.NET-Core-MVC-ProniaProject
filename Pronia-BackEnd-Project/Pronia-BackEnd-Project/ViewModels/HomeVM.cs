@@ -9,12 +9,11 @@ namespace Pronia_BackEnd_Project.ViewModels
 
         public IEnumerable<Client> Clients { get; set; }
 
-       
-
         public IEnumerable<Blog> Blogs { get; set; }
         public IEnumerable<Banner> Banners { get; set; }
 
         public IEnumerable<Product> Product { get; set; }
+        public Dictionary<string, string> Settings { get; set; } 
 
     }
 }

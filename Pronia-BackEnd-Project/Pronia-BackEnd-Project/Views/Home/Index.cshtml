@@ -7,239 +7,202 @@
 
 
 
-      <!-- Begin Slider Area -->
-      <div class="slider-area">
-        <!-- Main Slider -->
-        <div class="swiper-container main-slider swiper-arrow with-bg_white">
-          <div class="swiper-wrapper">
-              @foreach (var slider in Model.Sliders)
+<!-- Begin Slider Area -->
+<div class="slider-area">
+    <!-- Main Slider -->
+    <div class="swiper-container main-slider swiper-arrow with-bg_white">
+        <div class="swiper-wrapper">
+            @foreach (var slider in Model.Sliders)
             {
-                
-            
-            <div class="swiper-slide animation-style-01">
-              <div
-                class="slide-inner style-1 bg-height"
-                data-bg-image="assets/images/slider/bg/@slider.BackgroundImage"
-              >
-                <div class="container">
-                  <div class="row">
-                    <div class="col-lg-6 order-2 order-lg-1 align-self-center">
-                      <div class="slide-content text-black">
-                        <span class="offer">@slider.Offer</span>
-                        <h2 class="title">@slider.Title</h2>
-                        <p class="short-desc">
-                         @slider.Description
-                        </p>
-                        <div class="btn-wrap">
-                          <a
-                            class="btn btn-custom-size xl-size btn-pronia-primary"
-                            href="shop.html"
-                            >Discover Now</a
-                          >
+
+
+                <div class="swiper-slide animation-style-01">
+                    <div class="slide-inner style-1 bg-height"
+                     data-bg-image="assets/images/slider/bg/@slider.BackgroundImage">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6 order-2 order-lg-1 align-self-center">
+                                    <div class="slide-content text-black">
+                                        <span class="offer">@slider.Offer</span>
+                                        <h2 class="title">@slider.Title</h2>
+                                        <p class="short-desc">
+                                            @slider.Description
+                                        </p>
+                                        <div class="btn-wrap">
+                                            <a class="btn btn-custom-size xl-size btn-pronia-primary"
+                                           href="shop.html">Discover Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-8 offset-md-2 offset-lg-0 order-1 order-lg-2">
+                                    <div class="inner-img">
+                                        <div class="scene fill">
+                                            <div class="expand-width" data-depth="0.2">
+                                                <img src="~/assets/images/website-images//@slider.Image"
+                                                 alt="Inner Image" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
                     </div>
-                    <div
-                      class="col-lg-6 col-md-8 offset-md-2 offset-lg-0 order-1 order-lg-2"
-                    >
-                      <div class="inner-img">
-                        <div class="scene fill">
-                          <div class="expand-width" data-depth="0.2">
-                            <img
-                              src="~/assets/images/website-images//@slider.Image"
-                              alt="Inner Image"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-              </div>
-            </div>
-             }
-          </div>
-          <!-- Add Pagination -->
-          <div class="swiper-pagination d-md-none"></div>
-
-          <!-- Add Arrows -->
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
+            }
         </div>
-      </div>
-      <!-- Slider Area End Here -->
+        <!-- Add Pagination -->
+        <div class="swiper-pagination d-md-none"></div>
 
-      <!-- Begin Shipping Area -->
-       @await Component.InvokeAsync("Advertising")
-      <!-- Shipping Area End Here -->
-
-      <!-- Begin Product Area -->
-      <div class="product-area section-space-top-100">
-        <div class="container">
-          <div class="section-title-wrap">
-            <h2 class="section-title mb-0">Our Products</h2>
-          </div>
-          <div class="row">
+        <!-- Add Arrows -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+</div>
+<!-- Slider Area End Here -->
+<!-- Begin Shipping Area -->
+@await Component.InvokeAsync("Advertising")
+<!-- Shipping Area End Here -->
+<!-- Begin Product Area -->
+<div class="product-area section-space-top-100">
+    <div class="container">
+        <div class="section-title-wrap">
+            <h2 class="section-title mb-0">@Model.Settings["OurProduct"]</h2>
+        </div>
+        <div class="row">
             <div class="col-lg-12">
-              <ul
-                class="nav product-tab-nav tab-style-1"
-                id="myTab"
-                role="tablist"
-              >
-                <li class="nav-item" role="presentation">
-                  <a
-                    class="active"
-                    id="featured-tab"
-                    data-bs-toggle="tab"
-                    href="#featured"
-                    role="tab"
-                    aria-controls="featured"
-                    aria-selected="true"
-                  >
-                    Featured
-                  </a>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <a
-                    id="bestseller-tab"
-                    data-bs-toggle="tab"
-                    href="#bestseller"
-                    role="tab"
-                    aria-controls="bestseller"
-                    aria-selected="false"
-                  >
-                    Bestseller
-                  </a>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <a
-                    id="latest-tab"
-                    data-bs-toggle="tab"
-                    href="#latest"
-                    role="tab"
-                    aria-controls="latest"
-                    aria-selected="false"
-                  >
-                    Latest
-                  </a>
-                </li>
-              </ul>
-              <div class="tab-content" id="myTabContent">
-                <div
-                  class="tab-pane fade show active"
-                  id="featured"
-                  role="tabpanel"
-                  aria-labelledby="featured-tab"
-                >
-                  <div class="product-item-wrap row">
+                <ul class="nav product-tab-nav tab-style-1"
+                    id="myTab"
+                    role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="active"
+                           id="featured-tab"
+                           data-bs-toggle="tab"
+                           href="#featured"
+                           role="tab"
+                           aria-controls="featured"
+                           aria-selected="true">
+                            Featured
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a id="bestseller-tab"
+                           data-bs-toggle="tab"
+                           href="#bestseller"
+                           role="tab"
+                           aria-controls="bestseller"
+                           aria-selected="false">
+                            Bestseller
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a id="latest-tab"
+                           data-bs-toggle="tab"
+                           href="#latest"
+                           role="tab"
+                           aria-controls="latest"
+                           aria-selected="false">
+                            Latest
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active"
+                         id="featured"
+                         role="tabpanel"
+                         aria-labelledby="featured-tab">
+                        <div class="product-item-wrap row">
 
                             @foreach (var product in Model.Product.OrderByDescending(m => m.Rates).Take(8))
                             {
-                                
-                            
-                    <div class="col-xl-3 col-md-4 col-sm-6">
-                      <div class="product-item">
-                        <div class="product-img">
-                           <a  asp-controller="Shop" asp-action="Detail" asp-route-id="@product.Id">
-                            <img
-                              class="primary-img"
+
+
+                                <div class="col-xl-3 col-md-4 col-sm-6">
+                                    <div class="product-item">
+                                        <div class="product-img">
+                                            <a asp-controller="Shop" asp-action="Detail" asp-route-id="@product.Id">
+                                                <img class="primary-img"
                                                  src="~/assets/images/website-images//@product.ProductImages?.Where(m => m.IsMain).FirstOrDefault()?.Image"
-                              alt="Product Images"
-                            />
-                            <img
-                              class="secondary-img"
-                              src="~/assets/images/website-images//@product.ProductImages?.Where(m => m.IsMain).FirstOrDefault()?.Image"
-                              alt="Product Images"
-                            />
-                          </a>
-                          <div class="product-add-action">
-                            <ul>
-                              <li>
-                                <a
-                                  href="wishlist.html"
-                                  data-tippy="Add to wishlist"
-                                  data-tippy-inertia="true"
-                                  data-tippy-animation="shift-away"
-                                  data-tippy-delay="50"
-                                  data-tippy-arrow="true"
-                                  data-tippy-theme="sharpborder"
-                                >
-                                  <i class="pe-7s-like"></i>
-                                </a>
-                              </li>
-                              <li
-                                class="quuickview-btn"
-                                data-bs-toggle="modal"
-                                data-bs-target="#quickModal"
-                              >
-                                <a
-                                  href="#"
-                                  data-tippy="Quickview"
-                                  data-tippy-inertia="true"
-                                  data-tippy-animation="shift-away"
-                                  data-tippy-delay="50"
-                                  data-tippy-arrow="true"
-                                  data-tippy-theme="sharpborder"
-                                >
-                                  <i class="pe-7s-look"></i>
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  href="cart.html"
-                                  data-tippy="Add to cart"
-                                  data-tippy-inertia="true"
-                                  data-tippy-animation="shift-away"
-                                  data-tippy-delay="50"
-                                  data-tippy-arrow="true"
-                                  data-tippy-theme="sharpborder"
-                                >
-                                  <i class="pe-7s-cart"></i>
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
+                                                 alt="Product Images" />
+                                                <img class="secondary-img"
+                                                 src="~/assets/images/website-images//@product.ProductImages?.Where(m => m.IsMain).FirstOrDefault()?.Image"
+                                                 alt="Product Images" />
+                                            </a>
+                                            <div class="product-add-action">
+                                                <ul>
+                                                    <li>
+                                                        <a href="wishlist.html"
+                                                       data-tippy="Add to wishlist"
+                                                       data-tippy-inertia="true"
+                                                       data-tippy-animation="shift-away"
+                                                       data-tippy-delay="50"
+                                                       data-tippy-arrow="true"
+                                                       data-tippy-theme="sharpborder">
+                                                            <i class="pe-7s-like"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li class="quuickview-btn"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#quickModal">
+                                                        <a href="#"
+                                                       data-tippy="Quickview"
+                                                       data-tippy-inertia="true"
+                                                       data-tippy-animation="shift-away"
+                                                       data-tippy-delay="50"
+                                                       data-tippy-arrow="true"
+                                                       data-tippy-theme="sharpborder">
+                                                            <i class="pe-7s-look"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="cart.html"
+                                                       data-tippy="Add to cart"
+                                                       data-tippy-inertia="true"
+                                                       data-tippy-animation="shift-away"
+                                                       data-tippy-delay="50"
+                                                       data-tippy-arrow="true"
+                                                       data-tippy-theme="sharpborder">
+                                                            <i class="pe-7s-cart"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="product-content">
+                                            <a class="product-name" href="shop.html">American Marigold</a>
+                                            <div class="price-box pb-1">
+                                                <span class="new-price">$@product.Price</span>
+                                            </div>
+                                            <div class="rating-box">
+                                                <ul>
+                                                    @for (int i = 0; i < product.Rates; i++)
+                                                    {
+
+
+                                                        <li><i class="fa fa-star"></i></li>
+
+
+                                                    }
+
+                                                    @for (int i = 0; i < 5 - product.Rates; i++)
+                                                    {
+
+                                                        <li><i style="color:gray;" class="fa fa-star"></i></li>
+
+                                                    }
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
                         </div>
-                        <div class="product-content">
-                          <a class="product-name" href="shop.html"
-                            >American Marigold</a
-                          >
-                          <div class="price-box pb-1">
-                            <span class="new-price">$@product.Price</span>
-                          </div>
-                          <div class="rating-box">
-                            <ul>
-                                 @for (int i = 0; i < product.Rates; i++)
-                                {
-
-
-                                    <li><i class="fa fa-star"></i></li>
-
-
-                                }
-
-                                @for (int i = 0; i < 5 - product.Rates; i++)
-                                {
-
-                                    <li><i style="color:gray;" class="fa fa-star"></i></li>
-
-                                }
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
                     </div>
-                
-                    }
-                  </div>
-                </div>
-                <div
-                  class="tab-pane fade"
-                  id="bestseller"
-                  role="tabpanel"
-                  aria-labelledby="bestseller-tab"
-                >
-                  <div class="product-item-wrap row">
+                    <div class="tab-pane fade"
+                         id="bestseller"
+                         role="tabpanel"
+                         aria-labelledby="bestseller-tab">
+                        <div class="product-item-wrap row">
 
                             @foreach (var product in Model.Product.OrderByDescending(m => m.SaleCount).Take(8))
                             {
@@ -248,7 +211,7 @@
                                 <div class="col-xl-3 col-md-4 col-sm-6">
                                     <div class="product-item">
                                         <div class="product-img">
-                                            <a asp-controller="Shop" asp-action="Detail" asp-route-id="@product.Id" >
+                                            <a asp-controller="Shop" asp-action="Detail" asp-route-id="@product.Id">
                                                 <img class="primary-img"
                                                  src="~/assets/images/website-images//@product.ProductImages?.Where(m => m.IsMain).FirstOrDefault()?.Image"
                                                  alt="Product Images" />
@@ -326,15 +289,13 @@
 
                             }
 
-                  </div>
-                </div>
-                <div
-                  class="tab-pane fade"
-                  id="latest"
-                  role="tabpanel"
-                  aria-labelledby="latest-tab"
-                >
-                  <div class="product-item-wrap row">
+                        </div>
+                    </div>
+                    <div class="tab-pane fade"
+                         id="latest"
+                         role="tabpanel"
+                         aria-labelledby="latest-tab">
+                        <div class="product-item-wrap row">
 
 
                             @foreach (var product in Model.Product.OrderByDescending(m => m.Created).Take(4))
@@ -421,310 +382,260 @@
                                 </div>
 
                             }
-                  
-                  </div>
+
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-      <!-- Product Area End Here -->
-
-      <!-- Begin Banner Area -->
-      <div class="banner-area section-space-top-90">
-        <div class="container">
-          <div class="row g-min-30 g-4">
+    </div>
+</div>
+<!-- Product Area End Here -->
+<!-- Begin Banner Area -->
+<div class="banner-area section-space-top-90">
+    <div class="container">
+        <div class="row g-min-30 g-4">
             <div class="col-lg-8">
-              <div class="banner-item img-hover-effect">
-                <div class="banner-img">
-                  <img
-                    src="~/assets/images/website-images//@Model.Banners.FirstOrDefault(m=> m.IsLarge)?.Image"
-                    alt="Banner Image"
-                  />
-                </div>
-                <div class="banner-content text-position-left">
-                  <span class="collection">@Model.Banners.FirstOrDefault(m=> m.IsLarge).Title</span>
-                  <h3 class="title">
+                <div class="banner-item img-hover-effect">
+                    <div class="banner-img">
+                        <img src="~/assets/images/website-images//@Model.Banners.FirstOrDefault(m=> m.IsLarge)?.Image"
+                             alt="Banner Image" />
+                    </div>
+                    <div class="banner-content text-position-left">
+                        <span class="collection">@Model.Banners.FirstOrDefault(m=> m.IsLarge).Title</span>
+                        <h3 class="title">
 
-                      @Html.Raw(Model.Banners.FirstOrDefault(m=> m.IsLarge).Name)
-                   
-                  </h3>
-                  <div class="button-wrap">
-                    <a
-                      class="btn btn-custom-size btn-pronia-primary"
-                      href="shop.html"
-                      >Shop Now</a
-                    >
-                  </div>
+                            @Html.Raw(Model.Banners.FirstOrDefault(m=> m.IsLarge).Name)
+
+                        </h3>
+                        <div class="button-wrap">
+                            <a class="btn btn-custom-size btn-pronia-primary"
+                               href="shop.html">Shop Now</a>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
             <div class="col-lg-4 col-md-6">
-              <div class="banner-item img-hover-effect">
-                <div class="banner-img">
-                  <img
-                    src="~/assets/images/website-images//@Model.Banners.FirstOrDefault(m=> !m.IsLarge)?.Image"
-                    alt="Banner Image"
-                  />
-                </div>
-                <div class="banner-content text-position-center">
+                <div class="banner-item img-hover-effect">
+                    <div class="banner-img">
+                        <img src="~/assets/images/website-images//@Model.Banners.FirstOrDefault(m=> !m.IsLarge)?.Image"
+                             alt="Banner Image" />
+                    </div>
+                    <div class="banner-content text-position-center">
                         <span class="collection">@Model.Banners.FirstOrDefault(m=> !m.IsLarge).Title</span>
-                  <h3 class="title"> @Html.Raw(Model.Banners.FirstOrDefault(m=> !m.IsLarge).Name)</h3>
-                  <div class="button-wrap">
-                    <a
-                      class="btn btn-custom-size lg-size btn-pronia-primary"
-                      href="shop.html"
-                      >Shop Now</a
-                    >
-                  </div>
+                        <h3 class="title"> @Html.Raw(Model.Banners.FirstOrDefault(m=> !m.IsLarge).Name)</h3>
+                        <div class="button-wrap">
+                            <a class="btn btn-custom-size lg-size btn-pronia-primary"
+                               href="shop.html">Shop Now</a>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
             <div class="col-lg-4 col-md-6">
-              <div class="banner-item img-hover-effect">
-                <div class="banner-img">
-                  <img src="~/assets/images/website-images//@Model.Banners.LastOrDefault(m=> !m.IsLarge)?.Image"
-                    alt="Banner Image"
-                  />
-                </div>
-                <div class="banner-content text-position-center">
+                <div class="banner-item img-hover-effect">
+                    <div class="banner-img">
+                        <img src="~/assets/images/website-images//@Model.Banners.LastOrDefault(m=> !m.IsLarge)?.Image"
+                             alt="Banner Image" />
+                    </div>
+                    <div class="banner-content text-position-center">
                         <span class="collection">@Model.Banners.LastOrDefault(m=> !m.IsLarge).Title</span>
                         <h3 class="title"> @Html.Raw(Model.Banners.LastOrDefault(m=> !m.IsLarge).Name)</h3>
-                  <div class="button-wrap">
-                    <a
-                      class="btn btn-custom-size lg-size btn-pronia-primary"
-                      href="shop.html"
-                      >Shop Now</a
-                    >
-                  </div>
+                        <div class="button-wrap">
+                            <a class="btn btn-custom-size lg-size btn-pronia-primary"
+                               href="shop.html">Shop Now</a>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
             <div class="col-lg-8">
-              <div class="banner-item img-hover-effect">
-                <div class="banner-img">
-                  <img src="~/assets/images/website-images//@Model.Banners.LastOrDefault(m=> m.IsLarge)?.Image"
-                    alt="Banner Image"
-                  />
-                </div>
-                <div class="banner-content text-position-left">
+                <div class="banner-item img-hover-effect">
+                    <div class="banner-img">
+                        <img src="~/assets/images/website-images//@Model.Banners.LastOrDefault(m=> m.IsLarge)?.Image"
+                             alt="Banner Image" />
+                    </div>
+                    <div class="banner-content text-position-left">
                         <span class="collection">@Model.Banners.LastOrDefault(m=> m.IsLarge).Title</span>
-                  <h3 class="title">
+                        <h3 class="title">
                             @Html.Raw(Model.Banners.LastOrDefault(m=> m.IsLarge).Name)
-                  </h3>
-                  <div class="button-wrap">
-                    <a
-                      class="btn btn-custom-size lg-size btn-pronia-primary"
-                      href="shop.html"
-                      >Shop Now</a
-                    >
-                  </div>
+                        </h3>
+                        <div class="button-wrap">
+                            <a class="btn btn-custom-size lg-size btn-pronia-primary"
+                               href="shop.html">Shop Now</a>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-      <!-- Banner Area End Here -->
-
-      <!-- Begin Product Area -->
-      <div class="product-area section-space-top-100">
-        <div class="container">
-          <div class="row">
+    </div>
+</div>
+<!-- Banner Area End Here -->
+<!-- Begin Product Area -->
+<div class="product-area section-space-top-100">
+    <div class="container">
+        <div class="row">
             <div class="section-title-wrap without-tab">
-              <h2 class="section-title">New Products</h2>
-              <p class="section-desc">
-                Contrary to popular belief, Lorem Ipsum is not simply random
-                text. It has roots in a piece of classical Latin literature
-              </p>
+                <h2 class="section-title">@Model.Settings["NewProducts"]</h2>
+                <p class="section-desc">
+                    @Model.Settings["NewPordcutsDescription"]
+                </p>
             </div>
             <div class="col-lg-12">
-              <div class="swiper-container product-slider">
+                <div class="swiper-container product-slider">
 
-                
-                        
-                    
-                      <div class="swiper-wrapper">
-                   
+
+
+
+                    <div class="swiper-wrapper">
+
                         @foreach (var product in Model.Product.OrderByDescending(m => m.Created).Take(4))
                         {
 
                             <div class="swiper-slide product-item">
-                    <div class="product-img">
-                      <a asp-controller="Shop" asp-action="Detail" asp-route-id="@product.Id">
-                        <img
-                          class="primary-img"
+                                <div class="product-img">
+                                    <a asp-controller="Shop" asp-action="Detail" asp-route-id="@product.Id">
+                                        <img class="primary-img"
                                          src="~/assets/images/website-images//@product.ProductImages?.Where(m => m.IsMain).FirstOrDefault()?.Image"
-                          alt="Product Images"
-                        />
-                        <img
-                          class="secondary-img"
-                          src="~/assets/images/website-images///@product.ProductImages?.Where(m => !m.IsMain).FirstOrDefault()?.Image"
-                          alt="Product Images"
-                        />
-                      </a>
-                      <div class="product-add-action">
-                        <ul>
-                          <li>
-                            <a
-                              href="wishlist.html"
-                              data-tippy="Add to wishlist"
-                              data-tippy-inertia="true"
-                              data-tippy-animation="shift-away"
-                              data-tippy-delay="50"
-                              data-tippy-arrow="true"
-                              data-tippy-theme="sharpborder"
-                            >
-                              <i class="pe-7s-like"></i>
-                            </a>
-                          </li>
-                          <li
-                            class="quuickview-btn"
-                            data-bs-toggle="modal"
-                            data-bs-target="#quickModal"
-                          >
-                            <a
-                              href="#"
-                              data-tippy="Quickview"
-                              data-tippy-inertia="true"
-                              data-tippy-animation="shift-away"
-                              data-tippy-delay="50"
-                              data-tippy-arrow="true"
-                              data-tippy-theme="sharpborder"
-                            >
-                              <i class="pe-7s-look"></i>
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              href="cart.html"
-                              data-tippy="Add to cart"
-                              data-tippy-inertia="true"
-                              data-tippy-animation="shift-away"
-                              data-tippy-delay="50"
-                              data-tippy-arrow="true"
-                              data-tippy-theme="sharpborder"
-                            >
-                              <i class="pe-7s-cart"></i>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
+                                         alt="Product Images" />
+                                        <img class="secondary-img"
+                                         src="~/assets/images/website-images///@product.ProductImages?.Where(m => !m.IsMain).FirstOrDefault()?.Image"
+                                         alt="Product Images" />
+                                    </a>
+                                    <div class="product-add-action">
+                                        <ul>
+                                            <li>
+                                                <a href="wishlist.html"
+                                               data-tippy="Add to wishlist"
+                                               data-tippy-inertia="true"
+                                               data-tippy-animation="shift-away"
+                                               data-tippy-delay="50"
+                                               data-tippy-arrow="true"
+                                               data-tippy-theme="sharpborder">
+                                                    <i class="pe-7s-like"></i>
+                                                </a>
+                                            </li>
+                                            <li class="quuickview-btn"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#quickModal">
+                                                <a href="#"
+                                               data-tippy="Quickview"
+                                               data-tippy-inertia="true"
+                                               data-tippy-animation="shift-away"
+                                               data-tippy-delay="50"
+                                               data-tippy-arrow="true"
+                                               data-tippy-theme="sharpborder">
+                                                    <i class="pe-7s-look"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="cart.html"
+                                               data-tippy="Add to cart"
+                                               data-tippy-inertia="true"
+                                               data-tippy-animation="shift-away"
+                                               data-tippy-delay="50"
+                                               data-tippy-arrow="true"
+                                               data-tippy-theme="sharpborder">
+                                                    <i class="pe-7s-cart"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="product-content">
+                                    <a class="product-name" href="shop.html">@product.Name</a>
+                                    <div class="price-box pb-1">
+                                        <span class="new-price">$@product.Price</span>
+                                    </div>
+                                    <div class="rating-box">
+                                        <ul>
+                                            @for (int i = 0; i < product.Rates; i++)
+                                            {
+
+                                                <li><i class="fa fa-star"></i></li>
+
+
+                                            }
+
+                                            @for (int i = 0; i < 5 - product.Rates; i++)
+                                            {
+                                                <li><i style="color:gray;" class="fa fa-star"></i></li>
+
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
                     </div>
-                    <div class="product-content">
-                      <a class="product-name" href="shop.html"
-                        >@product.Name</a
-                      >
-                      <div class="price-box pb-1">
-                        <span class="new-price">$@product.Price</span>
-                      </div>
-                      <div class="rating-box">
-                        <ul>
-                           @for (int i = 0; i < product.Rates; i++)
-                           {
-
-                             <li><i class="fa fa-star"></i></li>
 
 
-                           }
-
-                           @for (int i = 0; i < 5 - product.Rates; i++)
-                           {
-                            <li><i style="color:gray;" class="fa fa-star"></i></li>
-
-                            }
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  }
-                  
                 </div>
-                  
-
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-      <!-- Product Area End Here -->
-
-      <!-- Begin Testimonial Area -->
-      <div
-        class="testimonial-area section-space-top-90 section-space-bottom-95"
-      >
-        <div class="container-fluid">
-          <div
-            class="testimonial-bg"
-            data-bg-image="assets/images/testimonial/bg/1-1-1820x443.jpg"
-          >
+    </div>
+</div>
+<!-- Product Area End Here -->
+<!-- Begin Testimonial Area -->
+<div class="testimonial-area section-space-top-90 section-space-bottom-95">
+    <div class="container-fluid">
+        <div class="testimonial-bg"
+             data-bg-image="assets/images/testimonial/bg/1-1-1820x443.jpg">
             <div class="section-title-wrap">
-              <h2 class="section-title">What Say Client</h2>
-              <p class="section-desc mb-0">
-                Contrary to popular belief, Lorem Ipsum is not simply random
-                text. It has roots in a piece of classical Latin literature
-              </p>
+                <h2 class="section-title">@Model.Settings["Client"]</h2>
+                <p class="section-desc mb-0">
+                    @Model.Settings["ClientDescription"]
+                </p>
             </div>
-          </div>
-          <div class="container custom-space">
-            <div class="swiper-container testimonial-slider with-bg">
-              <div class="swiper-wrapper">
-                  @foreach (var client in Model.Clients)
-                 {
-                <div class="swiper-slide testimonial-item">
-                  <div class="user-info mb-3">
-                    <div class="user-shape-wrap">
-                      <div class="user-img">
-                        <img
-                          src="~/assets/images/website-images//@client.Image"
-                          alt="User Image"
-                        />
-                      </div>
-                    </div>
-                    <div class="user-content text-charcoal">
-                      <h4 class="user-name mb-1">@client.Name</h4>
-                      <span class="user-occupation">Client</span>
-                    </div>
-                  </div>
-                  <p class="user-comment mb-6">
-                    @client.Description
-                  </p>
-                </div>
-                }
-              </div>
-              <!-- Add Pagination -->
-              <div class="swiper-pagination without-absolute"></div>
-            </div>
-          </div>
         </div>
-      </div>
-      <!-- Testimonial Area End Here -->
-
-
-
-    
-      
-      <!-- Begin Brand Area -->
-         @await Component.InvokeAsync("Brand")
-      <!-- Brand Area End Here -->
-
-      <!-- Begin Blog Area -->
-      <div class="blog-area section-space-bottom-100">
-        <div class="container">
-          <div class="section-title-wrap">
-            <h2 class="section-title mb-7">Latest Blog</h2>
-            <p class="section-desc">
-              Contrary to popular belief, Lorem Ipsum is not simply random text.
-              It has roots in a piece of classical Latin literature
-            </p>
-          </div>
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="swiper-container blog-slider">
+        <div class="container custom-space">
+            <div class="swiper-container testimonial-slider with-bg">
                 <div class="swiper-wrapper">
+                    @foreach (var client in Model.Clients)
+                    {
+                        <div class="swiper-slide testimonial-item">
+                            <div class="user-info mb-3">
+                                <div class="user-shape-wrap">
+                                    <div class="user-img">
+                                        <img src="~/assets/images/website-images//@client.Image"
+                                         alt="User Image" />
+                                    </div>
+                                </div>
+                                <div class="user-content text-charcoal">
+                                    <h4 class="user-name mb-1">@client.Name</h4>
+                                    <span class="user-occupation">Client</span>
+                                </div>
+                            </div>
+                            <p class="user-comment mb-6">
+                                @client.Description
+                            </p>
+                        </div>
+                    }
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination without-absolute"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Testimonial Area End Here -->
+<!-- Begin Brand Area -->
+@await Component.InvokeAsync("Brand")
+<!-- Brand Area End Here -->
+<!-- Begin Blog Area -->
+<div class="blog-area section-space-bottom-100">
+    <div class="container">
+        <div class="section-title-wrap">
+            <h2 class="section-title mb-7">@Model.Settings["LatestBlog"]</h2>
+            <p class="section-desc">
+                @Model.Settings["LatesBlogDescription"]
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="swiper-container blog-slider">
+                    <div class="swiper-wrapper">
 
-                  @foreach (var blog in Model.Blogs)
+                        @foreach (var blog in Model.Blogs)
                         {
                             <div class="swiper-slide">
                                 <div class="blog-item">
@@ -741,7 +652,7 @@
                                             <a asp-controller="Blog" asp-action="Detail" asp-route-id="@blog.Id">@blog.Title</a>
                                         </h2>
                                         <p class="short-desc mb-7">
-                                           @blog.Desciption
+                                            @blog.Desciption
                                         </p>
                                     </div>
                                     <div class="blog-img img-hover-effect">
@@ -759,14 +670,14 @@
                                 </div>
                             </div>
                         }
-                 
+
+                    </div>
+                    <!-- Add Arrows -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
                 </div>
-                <!-- Add Arrows -->
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-      <!-- Blog Area End Here -->
+    </div>
+</div>
+<!-- Blog Area End Here -->

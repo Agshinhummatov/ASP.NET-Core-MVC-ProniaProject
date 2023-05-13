@@ -45,10 +45,7 @@ namespace Pronia_BackEnd_Project.Data
 
         public DbSet<Team> Teams { get; set; }
 
-
-
-
-
+        public DbSet<Settings> Settings { get; set; }
 
 
 

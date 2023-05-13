@@ -33,7 +33,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var product in Model.Datas)  
+                @foreach (var blog in Model.Datas)  
                 {
                     count++;
                     <tr>
@@ -42,24 +42,28 @@
                             @count
                         </td>
                         <td class="py-1">
-                            <img src="~/assets/images/website-images/@product.MainImage" style="width: 70px; height: 70px" alt="image" />
+                            <img src="~/assets/images/website-images/@blog.MainImage" style="width: 70px; height: 70px" alt="image" />
                         </td>
 
                         <td>
-                            @product.Title
+                            @blog.Title
                         </td>
 
                         <td>
-                            @product.AuthorName
+                            @blog.AuthorName
                         </td>
                        
                         
                         
                         <td>
 
-                            <a class="btn btn-outline-info" asp-action="Detail" asp-route-id="@product.Id">Info</a>
-                            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@product.Id">Edit</a>
-                            <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@product.Id">Delete</a>
+                            <a class="btn btn-outline-info" asp-action="Detail" asp-route-id="@blog.Id">Info</a>
+                            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@blog.Id">Edit</a>
+
+                            <form style="display: inline-block;" asp-action="Delete" asp-route-id="@blog.Id" method="post">
+                                <button type="submit" class="btn btn-outline-danger">Delete</button>
+                            </form>
+                          
 
                         </td>
 

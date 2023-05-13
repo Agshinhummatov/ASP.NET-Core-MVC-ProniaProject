@@ -10,7 +10,6 @@ namespace Pronia_BackEnd_Project.Controllers
     {
         private readonly ITeamService _teamService;
 
-
         public AboutController(ITeamService teamService)
         {
             _teamService = teamService;
@@ -18,9 +17,7 @@ namespace Pronia_BackEnd_Project.Controllers
 
         public async Task<IActionResult> Index()
         {
-
             IEnumerable<Team> teams = await _teamService.GetAllAsync();
-
 
             AboutVM model = new()
             {
