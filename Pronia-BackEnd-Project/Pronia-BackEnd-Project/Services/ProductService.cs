@@ -40,7 +40,7 @@ namespace Pronia_BackEnd_Project.Services
 
 
 
-        public async Task<List<Product>> GetPaginatedDatas(int page, int take)  //bu method seyfeye uygun olaraq (int page ) data bazadan (int take) qeder datani gpturub gelir 
+        public async Task<List<Product>> GetPaginatedDatas(int page, int take)  
         {
             return await _context.Products.Include(m => m.ProductImages).
             Include(m => m.ProductCategories).
@@ -50,13 +50,13 @@ namespace Pronia_BackEnd_Project.Services
             Include(m => m.ProductColors).
             ThenInclude(m => m.Color).
             Include(m => m.ProductSize).
-            ThenInclude(m => m.Size).Skip((page * take) - take).Take(take).ToListAsync();  // (page*take) - take)  vurub taki cixirkiqki hemise  skipe elediyim qeder onu gosdersin novebetilerde nedise diger seyfede onu gosdersin yeni bir seyfede 5 product geldi digerinde 6 dan baslasin 10 kimi gosdersin bu mentiqde 
+            ThenInclude(m => m.Size).Skip((page * take) - take).Take(take).ToListAsync();  
         }
 
 
-        public async Task<int> GetCountAsync()   // productlarin sayini tapmaq ucun yazdiqimiz methodur adinda Async vermisiki asixron olsun
+        public async Task<int> GetCountAsync()   
         {
-            return await _context.Products.CountAsync(); // CountAsync() ssitemin verdiyi methodur
+            return await _context.Products.CountAsync(); 
         }
 
     }

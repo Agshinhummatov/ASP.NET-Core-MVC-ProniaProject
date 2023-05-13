@@ -6,6 +6,7 @@ using Pronia_BackEnd_Project.Helpers;
 using Pronia_BackEnd_Project.Models;
 using Pronia_BackEnd_Project.Services;
 using Pronia_BackEnd_Project.Services.Interfaces;
+using System.Text.RegularExpressions;
 
 namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 {
@@ -111,13 +112,11 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ProdcutCreateVM model)
+        public async Task<IActionResult> Create(ProductCreateVM model)
         {
             try
             {
                 IEnumerable<Product> products = await _productService.GetAllAsync();
-
-                //ViewBag.categories = new SelectList(categories, "Id", "Name");  //httpPost methodunda yazirkiqki frumuz submit olanda yeni refresh olanda hemin seletimiz ordan getmesin view bag ile gonderirik datani
 
 
                 ViewBag.categories = await GetCategoriesAsync();
@@ -130,7 +129,7 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
                 if (!ModelState.IsValid)
                 {
-                    return View(model); //  is validi yoxlayirki bos olmasin ve view icine bize gelen model  gonderiki eger biri sehv olarsa inputlari bos saxlamasin
+                    return View(model); 
                 }
 
 
@@ -139,13 +138,13 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
                     if (!photo.CheckFileType("image/"))
                     {
-                        ModelState.AddModelError("Photo", "File type must be image");
+                        ModelState.AddModelError("Photos", "File type must be image");
                         return View();
                     }
 
                     if (!photo.CheckFileSize(200))
                     {
-                        ModelState.AddModelError("Photo", "Image size must be max 200kb");
+                        ModelState.AddModelError("Photos", "Image size must be max 200kb");
                         return View();
                     }
 
@@ -155,12 +154,12 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
                 List<ProductTag> tags = new();
 
-                foreach (var product in model.ProductTags)
+                foreach (var tagId in model.ProductTags)
                 {
 
                     ProductTag tag = new()
                     {
-                        TagId = product
+                        TagId = tagId
                     };
 
                     tags.Add(tag);
@@ -169,12 +168,12 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
                 List<ProductColor> colors = new();
 
-                foreach (var product in model.ProductColors)
+                foreach (var colorId in model.ProductColors)
                 {
 
                     ProductColor color = new()
                     {
-                        ColorId = product
+                        ColorId = colorId
                     };
 
                     colors.Add(color);
@@ -183,12 +182,12 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
                 List<ProductSize> sizes = new();
 
-                foreach (var product in model.ProductSize)
+                foreach (var sizeId in model.ProductSize)
                 {
 
                     ProductSize size = new()
                     {
-                        SizeId = product
+                        SizeId = sizeId
                     };
 
                     sizes.Add(size);
@@ -197,21 +196,261 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
                 List<ProductCategory> categories = new();
 
-                foreach (var product in model.ProductCategories)
+                foreach (var categpryId in model.ProductCategories)
                 {
 
                     ProductCategory category = new()
                     {
-                        CategoryId = product
+                        CategoryId = categpryId
                     };
 
                     categories.Add(category);
                 }
 
 
-                List<ProductImage> productImages = new();  // list yaradiriq  burda hemin listada asqi methoda add edecik imagleri
+                List<ProductImage> productImages = new();  
 
                 foreach (var photo in model.Photos)
+                {
+                    string fileName = Guid.NewGuid().ToString() + "_" + photo.FileName; 
+
+
+                    string path = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", fileName);
+
+                    await FileHelper.SaveFlieAsync(path, photo);
+
+
+                    ProductImage productImage = new()
+                    {
+                        Image = fileName
+                    };
+
+                    productImages.Add(productImage); 
+
+                }
+
+                productImages.FirstOrDefault().IsMain = true; 
+
+                decimal convertedPrice = decimal.Parse(model.Price); 
+
+                Product newProduct = new()
+                {
+                    Name = model.Name,      
+                    Price = convertedPrice, 
+                    SaleCount = model.SaleCount, 
+                    Sku = model.Sku,
+                    Rates = model.Rates,
+                    StockCount = model.StockCount,
+                    Information = model.Information,
+                    Description = model.Description,
+                    ProductCategories = categories,
+                    ProductSize = sizes,
+                    ProductColors = colors,
+                    ProductTags = tags,
+                    ProductImages = productImages,
+                    
+                    
+                };
+
+                await _context.ProductImages.AddRangeAsync(productImages); 
+                await _context.Products.AddAsync(newProduct);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null) return BadRequest();
+
+            Product product = await _productService.GetFullDataByIdAsync((int)id);
+
+            if (product is null) return NotFound();
+
+
+            foreach (var item in product.ProductImages)
+            {
+                string path = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", item.Image);
+                FileHelper.DeleteFile(path);
+
+            }
+
+
+            _context.Products.Remove(product);
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+
+        }
+
+
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null) return BadRequest();
+
+            Product dbProduct = await _productService.GetFullDataByIdAsync((int)id);
+
+            if (dbProduct is null) return NotFound();
+
+
+            ViewBag.categories = await GetCategoriesAsync();
+
+            ViewBag.sizes = await GetSiziesAsync();
+
+            ViewBag.colors = await GetColorsAsync();
+
+            ViewBag.tags = await GetTagsAsync();
+
+
+            return View(new ProductEditVM
+            {   Id = dbProduct.Id,
+                Name = dbProduct.Name,
+                Description = dbProduct.Description,
+                Price = dbProduct.Price.ToString("0.#####").Replace(",", "."),
+                Rates = dbProduct.Rates,
+                SaleCount = dbProduct.SaleCount,
+                StockCount = dbProduct.StockCount,
+                Sku = dbProduct.Sku,
+                Information = dbProduct.Information,
+                Images = dbProduct.ProductImages,
+                ProductCategoriesId = dbProduct.ProductCategories.Select(pc => pc.CategoryId).ToList(),
+                ProductColorsId = dbProduct.ProductColors.Select(pc => pc.ColorId).ToList(),
+                ProductSizeId = dbProduct.ProductSize.Select(ps => ps.SizeId).ToList(),
+                ProductTagsId = dbProduct.ProductTags.Select(pt => pt.TagId).ToList(),
+
+            }); 
+
+        }
+
+
+
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int? id, ProductEditVM updatedProduct)
+        {
+            ViewBag.categories = await GetCategoriesAsync();
+
+            ViewBag.sizes = await GetSiziesAsync();
+
+            ViewBag.colors = await GetColorsAsync();
+
+            ViewBag.tags = await GetTagsAsync();
+
+
+            if (!ModelState.IsValid) return View(updatedProduct);
+
+            Product dbProduct = await _productService.GetFullDataByIdAsync((int)id);
+
+            if (dbProduct is null) return NotFound();
+
+            List<ProductTag> tags = new();
+
+            foreach (var tagId in updatedProduct.ProductTagsId)
+            {
+
+                ProductTag tag = new()
+                {
+                    TagId = tagId
+                };
+
+                tags.Add(tag);
+            }
+
+
+            List<ProductColor> colors = new();
+
+            foreach (var colorId in updatedProduct.ProductColorsId)
+            {
+
+                ProductColor color = new()
+                {
+                    ColorId = colorId
+                };
+
+                colors.Add(color);
+            }
+
+
+            List<ProductSize> sizes = new();
+
+            foreach (var sizeId in updatedProduct.ProductSizeId)
+            {
+
+                ProductSize size = new()
+                {
+                    SizeId = sizeId
+                };
+
+                sizes.Add(size);
+            }
+
+
+            List<ProductCategory> categories = new();
+
+            foreach (var categpryId in updatedProduct.ProductCategoriesId)
+            {
+
+                ProductCategory category = new()
+                {
+                    CategoryId = categpryId
+                };
+
+                categories.Add(category);
+            }
+
+            if (updatedProduct.Photos != null)
+            {
+
+                foreach (var photo in updatedProduct.Photos)
+                {
+
+                    if (!photo.CheckFileType("image/"))
+                    {
+                        ModelState.AddModelError("Photo", "File type must be image");
+                        return View(dbProduct);
+                    }
+
+                    if (!photo.CheckFileSize(200))
+                    {
+                        ModelState.AddModelError("Photo", "Image size must be max 200kb");
+                        return View(dbProduct);
+                    }
+
+
+
+                }
+
+                foreach (var item in dbProduct.ProductImages)
+                {
+
+                    string path = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", item.Image);
+
+                    FileHelper.DeleteFile(path);
+                }
+
+
+
+                List<ProductImage> productImages = new();  
+
+                foreach (var photo in updatedProduct.Photos)
                 {
                     string fileName = Guid.NewGuid().ToString() + "_" + photo.FileName; // Guid.NewGuid() bu neynir bir id kimi dusune birerik hemise ferqli herifler verir mene ki men sekilin name qoyanda o ferqli olsun tostring ele deyirem yeni random oalraq ferlqi ferqli sekil adi gelecek  ve  slider.Photo.FileName; ordan gelen ada birslerdir 
 
@@ -230,40 +469,65 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
                 }
 
-                productImages.FirstOrDefault().IsMain = true; // bu neynir elimizdeki list var icinde imagler var gelir onlardan biricsin defaltunu ture edirki productlarda 1 ci sekili gosdersin
+                productImages.FirstOrDefault().IsMain = true;
 
-                decimal convertedPrice = decimal.Parse(model.Price); 
-
-                Product newProduct = new()
-                {
-                    Name = model.Name,      
-                    Price = convertedPrice, 
-                    SaleCount = model.SaleCount, 
-                    Sku = model.Sku,
-                    StockCount = model.StockCount,
-                    Information = model.Information,
-                    Description = model.Description,
-                    ProductCategories = categories,
-                    ProductSize = sizes,
-                    ProductColors = colors,
-                    ProductTags = tags,
-                    ProductImages = productImages,
-                    
-                    
-                };
-
-                await _context.ProductImages.AddRangeAsync(productImages); // AddRangeAsync bu method bize listi yigir add edir 
-                await _context.Products.AddAsync(newProduct);
-                await _context.SaveChangesAsync();
-
-                return RedirectToAction(nameof(Index));
+                dbProduct.ProductImages = productImages;
             }
-            catch (Exception)
-            {
 
-                throw;
-            }
+
+            decimal convertedPrice = decimal.Parse(updatedProduct.Price);
+
+
+
+            dbProduct.Name = updatedProduct.Name;
+            dbProduct.Description = updatedProduct.Description;
+            dbProduct.Price = convertedPrice;
+            dbProduct.Sku = updatedProduct.Sku;
+            dbProduct.SaleCount = updatedProduct.SaleCount;
+            dbProduct.Rates = updatedProduct.Rates;
+            dbProduct.Information = updatedProduct.Information;
+            dbProduct.StockCount = updatedProduct.StockCount;
+            dbProduct.ProductCategories = categories;
+            dbProduct.ProductSize = sizes;
+            dbProduct.ProductColors = colors;
+            dbProduct.ProductTags = tags;
+            dbProduct.Updated = DateTime.Now;
+          
+            await _context.SaveChangesAsync();
+
+
+            return RedirectToAction(nameof(Index));
         }
+
+
+
+
+
+
+        //[HttpGet]
+        //public async Task<IActionResult> Detail(int? id)
+        //{
+        //    if (id is null) return BadRequest();
+
+        //    ViewBag.categories = await GetCategoriesAsync();
+
+        //    Product dbProduct = await _productService.GetFullDataByIdAsync((int)id); ;
+
+        //    ViewBag.desc = Regex.Replace(dbProduct.Description, "<.*?>", String.Empty);
+
+        //    return View(new ProductDetailVM
+        //    {
+
+        //        Name = dbProduct.Name,
+        //        Description = dbProduct.Description,
+        //        Price = dbProduct.Price.ToString("0.#####").Replace(",", "."),
+        //        SaleCount = dbProduct.SaleCount,
+        //        CategoryName = dbProduct.c,
+        //        Images = dbProduct.Images,
+        //        CategoryName = dbProduct.Category.Name
+        //    });
+        //}
+
 
 
 

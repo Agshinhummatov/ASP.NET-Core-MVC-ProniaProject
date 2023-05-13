@@ -1,0 +1,139 @@
+﻿@model ProductEditVM
+
+@{
+    ViewData["Title"] = "Edit";
+
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-description">
+                            Product
+                        </p>
+                        <div class="my-3 ">
+                            @foreach (var item in Model.Images)
+                            {
+                                <img src="~/assets/images/website-images/@item.Image" style="width:150px; height:150px" alt="Alternate Text" />
+                            }
+                        </div>
+                        <form asp-controller="Product" asp-action="Edit" enctype="multipart/form-data" class="forms-sample" method="post">
+
+                            <div class="form-group">
+                                <label style="color:darkred" class="mt-2"> Information </label>
+                                <textarea class="form-control" id="infotmation-text" asp-for="Information" rows="5"></textarea>
+                                <span class="text-danger" asp-validation-for="Information"></span>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label style="color:darkred" class="mt-2">Name </label>
+                                <input class="form-control" id="customFile" asp-for="Name" placeholder="Name" />
+                                <span class="text-danger" asp-validation-for="Name"></span>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label style="color:darkred" class="mt-2">Description </label>
+                                <textarea class="form-control" asp-for="Description" rows="5"></textarea>
+                                <span class="text-danger" asp-validation-for="Description"></span>
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label style="color:darkred" class="mt-2">Price</label>
+                                <input type="number" step=".01" class="form-control" id="customFile" asp-for="Price" placeholder="Price" />
+                                <span class="text-danger" asp-validation-for="Price"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label style="color:darkred" class="mt-2"> Sale Count</label>
+                                <input class="form-control" id="customFile" asp-for="SaleCount" placeholder="SaleCount" />
+                                <span class="text-danger" asp-validation-for="SaleCount"></span>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label style="color:darkred" class="mt-2"> Rates </label>
+                                <input class="form-control" type="number" id="customFile" min="1" max="5" asp-for="Rates" placeholder="Rates" />
+                                <span class="text-danger" asp-validation-for="Rates"></span>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label style="color:darkred" class="mt-2"> Stock Count</label>
+                                <input class="form-control" id="customFile" asp-for="StockCount" placeholder="Stock Count" />
+                                  <span class="text-danger" asp-validation-for="StockCount"></span>
+                            </div>
+
+
+
+
+                            <div class="form-group">
+                                <label style="color:darkred" class="mt-2">Sku</label>
+                                <input class="form-control" id="customFile" asp-for="Sku" placeholder="Sku" />
+                                <span class="text-danger" asp-validation-for="Sku"></span>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label style="color:darkred" class="mt-5">Categorys</label>
+                                <select class="form-control" id="customFile" asp-for="ProductCategoriesId" asp-items="@ViewBag.categories"></select>
+                            </div>
+
+                            <div class="form-group">
+                                <label style="color:darkred" class="mt-5">Sizies</label>
+                                <select class="form-control" id="customFile" asp-for="ProductSizeId" asp-items="@ViewBag.sizes"></select>
+                            </div>
+
+                            <div class="form-group">
+                                <label style="color:darkred" class="mt-5">Colors</label>
+                                <select class="form-control" id="customFile" asp-for="ProductColorsId" asp-items="@ViewBag.colors"></select>
+                            </div>
+
+                            <div class="form-group">
+                                <label style="color:darkred" class="mt-5">Tags</label>
+                                <select class="form-control" id="customFile" asp-for="ProductTagsId" asp-items="@ViewBag.tags"></select>
+                            </div>
+
+                            <div class="form-group">
+                                <label style="color:darkred" class="mt-2">Image </label>
+                                <input class="form-control" id="customFile" asp-for="Photos" />
+                            </div>
+
+
+                            <div class="buttons my-3">
+                                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                                <a class="btn btn-light" asp-action="Index">Cancel</a>
+                            </div>
+
+@*
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                            <a asp-action="Index" class="btn btn-light">Cancel</a>*@
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace("infotmation-text")
+
+
+    </script>
+
+}
