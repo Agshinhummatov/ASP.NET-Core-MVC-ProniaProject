@@ -69,7 +69,7 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
             string path = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", fileName);
 
-            await FileHelper.SaveFlieAsync(path, model.Photo);
+            await FileHelper.SaveFileAsync(path, model.Photo);
 
             Team newTeam = new()
             {

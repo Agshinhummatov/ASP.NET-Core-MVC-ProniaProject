@@ -30,7 +30,7 @@
             return Path.Combine(root, folder, file);
         }
 
-        public static async Task SaveFlieAsync(string path, IFormFile file)
+        public static async Task SaveFileAsync(string path, IFormFile file)
         {
             using (FileStream stream = new(path, FileMode.Create))    ///  using() neynir elaqeni qirir yeni bu www.rootun icinde getdi daha sonra deyiremki elaqeni qir bunu yazmasam exception cixacaq mutleq elaqeni qirlamiyam arxa planda qebz collectionu isleyir ve qirandan sonra silir arxa planda biz gormurk bunu
             {

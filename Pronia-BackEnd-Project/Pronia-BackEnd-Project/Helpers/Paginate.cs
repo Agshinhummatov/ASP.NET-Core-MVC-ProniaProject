@@ -3,9 +3,9 @@
 
     public class Paginate<T>
     {
-        public IEnumerable<T> Datas { get; set; }  // datlarini verir 
-        public int CurrentPage { get; set; } // olduqu seyfeni verir yeni page 
-        public int TotalPage { get; set; } // butun seyfelerin countunu verir yeni total nece dene page var onu
+        public IEnumerable<T> Datas { get; set; }  
+        public int CurrentPage { get; set; }  
+        public int TotalPage { get; set; } 
 
 
         public Paginate(IEnumerable<T> datas, int currentPage, int totalPage)
@@ -16,12 +16,12 @@
         }
 
 
-        public bool HasPrevious  // meyyen sert daxilinde datani geri qaytarir yeni encapsilationdur 
+        public bool HasPrevious 
         {
 
             get
             {
-                return CurrentPage > 1;   // bu neynir boyukdu 1 den boyuk olanda True olcaq   1 den kicik olanda False olcaq  gedib orda 
+                return CurrentPage > 1;   
             }
         }
 
@@ -30,7 +30,7 @@
 
             get
             {
-                return CurrentPage < TotalPage;  // bu ise doruki tutaqki 5 ci pagdeyem 6 ci pagde de en sonucndu bu zaman next olsun gelib sertim berber olursa yeni current page== totalPage netx olmasin
+                return CurrentPage < TotalPage;  
             }
         }
 

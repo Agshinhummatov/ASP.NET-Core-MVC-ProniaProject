@@ -1,0 +1,57 @@
+﻿@model List<CategoryIndexVM>
+
+
+@{
+    ViewData["Title"] = "Category";
+}
+
+
+
+<div class="container my-5">
+    <a class="btn btn-success" style="float: right;" asp-action="Create">Create</a>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+
+                    <th>
+                        Operations
+
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var category in Model)
+                {
+                        <tr>
+                            <td>
+                            @category.Name
+                            </td>
+
+
+                            <td>
+
+                                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@category.Id">Edit</a>
+                                <form style="display: inline-block;" asp-action="Delete" asp-route-id="@category.Id" method="post">
+                                    <button type="submit" class="btn btn-outline-danger">Delete</button>
+                                </form>
+
+                            </td>
+
+                        </tr>
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+

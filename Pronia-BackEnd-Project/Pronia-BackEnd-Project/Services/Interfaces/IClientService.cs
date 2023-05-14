@@ -4,7 +4,7 @@ namespace Pronia_BackEnd_Project.Services.Interfaces
 {
     public interface IClientService
     {
-        Task<Client> GetByIdAsync(int id);
+        Task<Client> GetFullDataByIdAsync(int id);
         Task<IEnumerable<Client>> GetAllAsync();
     }
 }

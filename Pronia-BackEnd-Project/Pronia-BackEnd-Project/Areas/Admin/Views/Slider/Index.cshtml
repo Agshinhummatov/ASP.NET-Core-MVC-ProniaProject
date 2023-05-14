@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Slider>
+
+
+@{
+    ViewData["Title"] = "Index";
+   
+}
+
+
+
+<div class="container my-5">
+    <a class="btn btn-success" style="float: right;" asp-action="Create">Create</a>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th >Image</th>
+
+                    <th >Background Image</th>
+               
+                  
+                    <th>
+                        Operations
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var slider in Model)
+                {
+                    
+                    <tr>
+
+                        
+                        
+                        <td class="cell">
+                            <img style="width:70px;height:70px;" src="~/assets/images/website-images/@slider.Image">
+                        </td>
+                        <td class="cell">
+                            <img style="width:70px;height:70px;" src="~/assets/images/website-images/@slider.BackgroundImage">
+                        </td>
+                      
+
+
+                      
+
+
+
+                        <td>
+
+                            <a class="btn btn-outline-info" asp-action="Detail" asp-route-id="@slider.Id">Info</a>
+                            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@slider.Id">Edit</a>
+
+                            <form style="display: inline-block;" asp-action="Delete" asp-route-id="@slider.Id" method="post">
+                                <button type="submit" class="btn btn-outline-danger">Delete</button>
+                            </form>
+
+
+                        </td>
+
+                    </tr>
+
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+

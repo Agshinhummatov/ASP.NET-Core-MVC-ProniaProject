@@ -12,7 +12,7 @@
     <h2 style="color:darkcyan; text-align:center;" class="mt-3"> Banner create</h2>
 
     <form class="form-sample" asp-action="Create" method="post" enctype="multipart/form-data">
-        @*enctype="multipart/form-data bunu mutleq yaziriq upload edende  string kimi deyil file kimi gonderisin methodumuza "*@
+
         <h4 style="color:darkred" class="mt-5">Add image </h4>
         <input class="form-control" id="customFile" asp-for="Image" />
         <span class="text-danger" asp-validation-for="Image"></span>

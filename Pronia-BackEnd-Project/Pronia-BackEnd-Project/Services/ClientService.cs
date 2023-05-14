@@ -16,7 +16,7 @@ namespace Pronia_BackEnd_Project.Services
         public async Task<IEnumerable<Client>> GetAllAsync() => await _context.Clients.Where(m => !m.SoftDelete).ToListAsync();
 
 
-        public async  Task<Client> GetByIdAsync(int id) => await _context.Clients.FindAsync(id);
+        public async  Task<Client> GetFullDataByIdAsync(int id) => await _context.Clients.FindAsync(id);
 
     }
 }

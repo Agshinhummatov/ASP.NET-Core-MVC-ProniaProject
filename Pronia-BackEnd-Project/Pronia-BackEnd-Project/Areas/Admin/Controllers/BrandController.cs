@@ -54,7 +54,7 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
 
         [HttpGet]
-        public IActionResult Create()     /*async-elemirik cunku data gelmir databazadan*/
+        public IActionResult Create()     
         {
             return View();
         }
@@ -71,9 +71,9 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
             try
             {
 
-                if (!ModelState.IsValid)    // create eden zaman input null olarsa, yeni isvalid deyilse(isvalid olduqda data daxil edilir) view a qayit
+                if (!ModelState.IsValid)    
                 {
-                    return View();    // lahiyenin ustune vurub arxa fonda null ucun olan  baglmaq lazimdi  yeni   <Nullable>disable</Nullable> elemek lazimdir 
+                    return View();    
                 }
 
 
@@ -100,18 +100,17 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
                 foreach (var photo in brand.Photos)
                 {
-                    string fileName = Guid.NewGuid().ToString() + "_" + photo.FileName; // Guid.NewGuid() bu neynir bir id kimi dusune birerik hemise ferqli herifler verir mene ki men sekilin name qoyanda o ferqli olsun tostring ele deyirem yeni random oalraq ferlqi ferqli sekil adi gelecek  ve  slider.Photo.FileName; ordan gelen ada birslerdir 
+                    string fileName = Guid.NewGuid().ToString() + "_" + photo.FileName; 
 
 
 
                     string path = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", fileName);
 
-                    await FileHelper.SaveFlieAsync(path, photo);
+                    await FileHelper.SaveFileAsync(path, photo);
 
-                    Brand newBrand = new()  // SliderCreateVM tipleri eyni deyil axi ona gorede gelirem intas aliram image beraberlesdirem  file name
+                    Brand newBrand = new()  
                     {
-                        Image = fileName    // slider tipinden olanda normalda bele yaziridiq    slider.Image = fileName; bude eyni seydi yeni silderin icindeki image beraberdi file name
-
+                        Image = fileName    
                     };
 
                     await _context.Brands.AddAsync(newBrand);
@@ -197,13 +196,13 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
                     FileHelper.DeleteFile(oldPath);
 
-                    string fileName = Guid.NewGuid().ToString() + "_" + brand.Photo.FileName; // Guid.NewGuid() bu neynir bir id kimi dusune birerik hemise ferqli herifler verir mene ki men sekilin name qoyanda o ferqli olsun tostring ele deyirem yeni random oalraq ferlqi ferqli sekil adi gelecek  ve  slider.Photo.FileName; ordan gelen ada birslerdir 
+                    string fileName = Guid.NewGuid().ToString() + "_" + brand.Photo.FileName; 
 
                     string newpath = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", fileName);
 
 
 
-                    await FileHelper.SaveFlieAsync(newpath, brand.Photo);
+                    await FileHelper.SaveFileAsync(newpath, brand.Photo);
 
                     dbBrand.Image = fileName;
 
@@ -226,7 +225,7 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
             catch (Exception ex)
             {
 
-                return RedirectToAction("Error", new { msj = ex.Message }); // eror mesajimizi diger seyfeye yoneldir "Error" yazdiqimiz indexe yoneldir
+                return RedirectToAction("Error", new { msj = ex.Message }); 
             }
 
 

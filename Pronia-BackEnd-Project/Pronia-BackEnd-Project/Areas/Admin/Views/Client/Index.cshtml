@@ -1,0 +1,65 @@
+﻿@model List<ClientListIndexVM>
+
+
+@{
+    ViewData["Title"] = "Index";
+   
+}
+
+
+
+<div class="container my-5">
+    <a class="btn btn-success" style="float: right;" asp-action="Create">Create</a>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th >Image</th>
+
+                    <th>Name</th>
+               
+                  
+                    <th>
+                        Operations
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var client in Model)
+                {
+                    
+                    <tr>
+
+                        <td class="cell">
+                            <img style="width:70px;height:70px;" src="~/assets/images/website-images/@client.Image">
+                        </td>
+                       
+
+                        <td >
+                            @client.Name
+                        </td>
+
+                        <td>
+
+                            <a class="btn btn-outline-info" asp-action="Detail" asp-route-id="@client.Id">Info</a>
+                            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@client.Id">Edit</a>
+
+                            <form style="display: inline-block;" asp-action="Delete" asp-route-id="@client.Id" method="post">
+                                <button type="submit" class="btn btn-outline-danger">Delete</button>
+                            </form>
+
+
+                        </td>
+
+                    </tr>
+
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+

@@ -11,12 +11,11 @@
     <h2 style="color:darkcyan; text-align:center;" class="mt-3">Create</h2>
 
     <form class="form-sample" asp-action="Create" method="post" enctype="multipart/form-data">
-        @*enctype="multipart/form-data bunu mutleq yaziriq upload edende  string kimi deyil file kimi gonderisin methodumuza "*@
+       
 
         <div class="form-group">
-            <label style="color:darkred" class="mt-2">Name </label>
-            <input class="form-control" id="customFile" asp-for="Title" placeholder="Name" />   @*Bu asp-for="Name"  Category nin ichinde olan name propertisidi ve eger inputlarim coxdusa deyisecek onlar *@
-            <span class="text-danger" asp-validation-for="Title"></span>
+            <label style="color:darkred" class="mt-2">Title </label>
+            <input class="form-control" id="customFile" asp-for="Title" placeholder="Title" />  
 
         </div>
 
@@ -33,9 +32,9 @@
 
         <div class="form-group">
             <label style="color:darkred" class="mt-5">Author</label>
-            <select class="form-control" id="customFile" asp-for="AuthorId" asp-items="@ViewBag.author"></select>
+            <select class="form-control" id="customFile" asp-for="AuthorId" asp-items="@ViewBag.authors"></select>
 
-            @* asp-for="CategoryId" bu ise bize catgeryy idni veriri yeni selecte click endende // asp-items="@ViewBag.categories" budurki bize textinde Nameini siralayir men gelirem hemin texte vuranda id sini gonderir sohbet burdan gedir colden view bag ile gonderdiknew SelectList(categories, "Id", "Name");  *@
+           
 
         </div>
 

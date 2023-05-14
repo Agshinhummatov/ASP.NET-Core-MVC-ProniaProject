@@ -6,6 +6,6 @@ namespace Pronia_BackEnd_Project.Services.Interfaces
     {
         Task<IEnumerable<Slider>> GetAllAsync();
 
-        Task<Slider> GetByIdAsync(int id);
+        Task<Slider> GetFullDataByIdAsync(int id);
     }
 }

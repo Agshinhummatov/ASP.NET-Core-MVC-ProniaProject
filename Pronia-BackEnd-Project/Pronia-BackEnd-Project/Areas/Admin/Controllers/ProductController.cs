@@ -217,7 +217,7 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
                     string path = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", fileName);
 
-                    await FileHelper.SaveFlieAsync(path, photo);
+                    await FileHelper.SaveFileAsync(path, photo);
 
 
                     ProductImage productImage = new()
@@ -457,7 +457,7 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
                     string path = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", fileName);
 
-                    await FileHelper.SaveFlieAsync(path, photo);
+                    await FileHelper.SaveFileAsync(path, photo);
 
 
                     ProductImage productImage = new()   // bir bir sekileri goturur forech icinde
@@ -504,29 +504,52 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
 
 
-        //[HttpGet]
-        //public async Task<IActionResult> Detail(int? id)
-        //{
-        //    if (id is null) return BadRequest();
+        [HttpGet]
+        public async Task<IActionResult> Detail(int? id)
+        {
 
-        //    ViewBag.categories = await GetCategoriesAsync();
 
-        //    Product dbProduct = await _productService.GetFullDataByIdAsync((int)id); ;
 
-        //    ViewBag.desc = Regex.Replace(dbProduct.Description, "<.*?>", String.Empty);
 
-        //    return View(new ProductDetailVM
-        //    {
 
-        //        Name = dbProduct.Name,
-        //        Description = dbProduct.Description,
-        //        Price = dbProduct.Price.ToString("0.#####").Replace(",", "."),
-        //        SaleCount = dbProduct.SaleCount,
-        //        CategoryName = dbProduct.c,
-        //        Images = dbProduct.Images,
-        //        CategoryName = dbProduct.Category.Name
-        //    });
-        //}
+            if (id == null) return BadRequest();
+
+            Product dbProduct = await _productService.GetFullDataByIdAsync((int)id);
+
+            if (dbProduct is null) return NotFound();
+
+
+            ViewBag.categories = await GetCategoriesAsync();
+
+            ViewBag.sizes = await GetSiziesAsync();
+
+            ViewBag.colors = await GetColorsAsync();
+
+            ViewBag.tags = await GetTagsAsync();
+
+
+            return View(new ProductEditVM
+            {
+                Id = dbProduct.Id,
+                Name = dbProduct.Name,
+                Description = dbProduct.Description,
+                Price = dbProduct.Price.ToString("0.#####").Replace(",", "."),
+                Rates = dbProduct.Rates,
+                SaleCount = dbProduct.SaleCount,
+                StockCount = dbProduct.StockCount,
+                Sku = dbProduct.Sku,
+                Information = dbProduct.Information,
+                Images = dbProduct.ProductImages,
+                ProductCategoriesId = dbProduct.ProductCategories.Select(pc => pc.CategoryId).ToList(),
+                ProductColorsId = dbProduct.ProductColors.Select(pc => pc.ColorId).ToList(),
+                ProductSizeId = dbProduct.ProductSize.Select(ps => ps.SizeId).ToList(),
+                ProductTagsId = dbProduct.ProductTags.Select(pt => pt.TagId).ToList(),
+
+            });
+
+
+
+        }
 
 
 

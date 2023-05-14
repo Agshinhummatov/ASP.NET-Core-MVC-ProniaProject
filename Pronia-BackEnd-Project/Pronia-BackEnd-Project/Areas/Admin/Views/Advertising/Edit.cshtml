@@ -1,0 +1,54 @@
+﻿@model AdvertisingEditVM
+
+@{
+    ViewData["Title"] = "Edit";
+
+}
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+
+            <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-description">
+                            Advertising
+                        </p>
+                        <div class="my-3 ">
+                           
+                            
+                                <img src="~/assets/images/website-images/@Model.Image" style="width:150px; height:150px" alt="Alternate Text" />
+                            
+                        </div>
+
+                        <form  asp-action="Edit" enctype="multipart/form-data" class="forms-sample" method="post">
+                            <div class="form-group">
+                                <label style="color:darkred" asp-for="Name"></label>
+                                <input class="form-control" asp-for="Name">
+                                <span asp-validation-for="Name" class="text-danger my-1"></span>
+                            </div>
+                           
+                            <div class="form-group">
+                                <label style="color:darkred" asp-for="Description"></label>
+                                <input class="form-control" asp-for="Description">
+                                <span asp-validation-for="Description" class="text-danger my-1"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label  style="color:darkred"  asp-for="Photo">Photos</label>
+                                <input class="form-control" asp-for="Photo">
+                                <span asp-validation-for="Photo" class="text-danger my-1"></span>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                            <a asp-action="Index" class="btn btn-light">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

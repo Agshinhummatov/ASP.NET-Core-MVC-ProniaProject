@@ -26,7 +26,7 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
             _authorService = authorService;
         }
 
-        public async Task<IActionResult> Index(int page = 1, int take = 2)  
+        public async Task<IActionResult> Index(int page = 1, int take = 5)  
         {
             IEnumerable<Blog> blogs = await _blogService.GetPaginatedDatas(page, take); 
 
@@ -78,7 +78,7 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
         {
             
 
-            ViewBag.categories = await GetAuthorsAsync();
+            ViewBag.authors = await GetAuthorsAsync();
 
             return View();
         }
@@ -129,7 +129,7 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
                     string path = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", fileName);
 
-                    await FileHelper.SaveFlieAsync(path, photo);
+                    await FileHelper.SaveFileAsync(path, photo);
 
 
                     BlogImage blogImage = new()   // bir bir sekileri goturur forech icinde
@@ -179,8 +179,6 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
             if (dbProduct is null) return NotFound();
 
              ViewBag.author = await GetAuthorsAsync();
-
-            //string convertedPrice = dbProduct.Price.ToString();
 
 
             return View(new BlogEditVM
@@ -249,7 +247,7 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
                     string path = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", fileName);
 
-                    await FileHelper.SaveFlieAsync(path, photo);
+                    await FileHelper.SaveFileAsync(path, photo);
 
 
                     BlogImage productImage = new()   // bir bir sekileri goturur forech icinde
@@ -287,13 +285,11 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
         {
             if (id is null) return BadRequest();
 
-            ViewBag.author = await GetAuthorsAsync();
-
             Blog dbProduct = await _blogService.GetFullDataByIdAsync((int)id);
 
             ViewBag.desc = Regex.Replace(dbProduct.Desciption, "<.*?>", String.Empty);
 
-            return View(new BlogDetailVM   // view gonderirik bunlari 
+            return View(new BlogDetailVM   
             {
 
                 Title = dbProduct.Title,
@@ -346,7 +342,7 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
             IEnumerable<Author> categories = await _authorService.GetAllAsync();
 
-            return new SelectList(categories, "Id", "Name"); /// bu neynir gedir selectin icindeki Id sini goturur ve nameini getirir mene id gedecek selectin valusuna namde gedecek textine // textine gorede id sini gondere bilecik
+            return new SelectList(categories, "Id", "Name"); 
 
 
         }

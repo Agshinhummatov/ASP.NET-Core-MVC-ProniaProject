@@ -17,7 +17,7 @@ namespace Pronia_BackEnd_Project.Services
 
         public async Task<IEnumerable<Slider>> GetAllAsync() => await _context.Sliders.Where(m => !m.SoftDelete).ToListAsync();
 
-        public async Task<Slider> GetByIdAsync(int id) => await _context.Sliders.FindAsync(id);
+        public async Task<Slider> GetFullDataByIdAsync(int id) => await _context.Sliders.FindAsync(id);
 
 
 

@@ -6,5 +6,6 @@ namespace Pronia_BackEnd_Project.Services.Interfaces
     {
         Task<IEnumerable<Author>> GetAllAsync();
 
+        Task<Author> GetByIdAsync(int id);
     }
 }

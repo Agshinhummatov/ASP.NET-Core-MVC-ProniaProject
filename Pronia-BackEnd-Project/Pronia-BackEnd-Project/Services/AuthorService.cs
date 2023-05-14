@@ -16,7 +16,7 @@ namespace Pronia_BackEnd_Project.Services
         public async Task<IEnumerable<Author>> GetAllAsync() => await _context.Authors.ToListAsync();
 
 
-
+        public async Task<Author> GetByIdAsync(int id) => await _context.Authors.FindAsync(id);
 
     }
 }

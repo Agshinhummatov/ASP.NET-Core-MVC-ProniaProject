@@ -1,4 +1,6 @@
-﻿namespace Pronia_BackEnd_Project.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Pronia_BackEnd_Project.Models
 {
     public class Client :BaseEntity
     {
@@ -8,5 +10,7 @@
 
             public string Description { get; set; }
 
+           [NotMapped]
+           public IFormFile Photo { get; set; }
     }
 }
