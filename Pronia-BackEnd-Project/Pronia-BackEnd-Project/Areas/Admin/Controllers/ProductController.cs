@@ -1,15 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Pronia_BackEnd_Project.Areas.Admin.ViewModels;
 using Pronia_BackEnd_Project.Data;
 using Pronia_BackEnd_Project.Helpers;
+using Pronia_BackEnd_Project.Helpers.Enums;
 using Pronia_BackEnd_Project.Models;
 using Pronia_BackEnd_Project.Services;
 using Pronia_BackEnd_Project.Services.Interfaces;
+using Pronia_BackEnd_Project.ViewModels;
 using System.Text.RegularExpressions;
 
 namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 {
+
+    [Authorize(Roles = "SuperAdmin,Admin")]
     [Area("Admin")]
     public class ProductController : Controller
     {
@@ -287,7 +292,6 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
             }
 
-
             _context.Products.Remove(product);
 
             await _context.SaveChangesAsync();
@@ -434,8 +438,6 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
                         return View(dbProduct);
                     }
 
-
-
                 }
 
                 foreach (var item in dbProduct.ProductImages)
@@ -452,7 +454,7 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
                 foreach (var photo in updatedProduct.Photos)
                 {
-                    string fileName = Guid.NewGuid().ToString() + "_" + photo.FileName; // Guid.NewGuid() bu neynir bir id kimi dusune birerik hemise ferqli herifler verir mene ki men sekilin name qoyanda o ferqli olsun tostring ele deyirem yeni random oalraq ferlqi ferqli sekil adi gelecek  ve  slider.Photo.FileName; ordan gelen ada birslerdir 
+                    string fileName = Guid.NewGuid().ToString() + "_" + photo.FileName; 
 
 
                     string path = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", fileName);
@@ -460,12 +462,12 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
                     await FileHelper.SaveFileAsync(path, photo);
 
 
-                    ProductImage productImage = new()   // bir bir sekileri goturur forech icinde
+                    ProductImage productImage = new()   
                     {
                         Image = fileName
                     };
 
-                    productImages.Add(productImage); // yuxardaki  List<ProductImage> add edir sekileri yeni nece dene sekili varsa o qederde add edecek
+                    productImages.Add(productImage); 
 
                 }
 
@@ -476,7 +478,6 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
 
             decimal convertedPrice = decimal.Parse(updatedProduct.Price);
-
 
 
             dbProduct.Name = updatedProduct.Name;
@@ -495,11 +496,8 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
           
             await _context.SaveChangesAsync();
 
-
             return RedirectToAction(nameof(Index));
         }
-
-
 
 
 
@@ -507,50 +505,71 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Detail(int? id)
         {
+            if (id is null) return BadRequest();
+
+            Product product = await _productService.GetFullDataByIdAsync((int)id);
+            if (product is null) return NotFound();
 
 
 
+            List<string> images = new List<string>();
 
-
-            if (id == null) return BadRequest();
-
-            Product dbProduct = await _productService.GetFullDataByIdAsync((int)id);
-
-            if (dbProduct is null) return NotFound();
-
-
-            ViewBag.categories = await GetCategoriesAsync();
-
-            ViewBag.sizes = await GetSiziesAsync();
-
-            ViewBag.colors = await GetColorsAsync();
-
-            ViewBag.tags = await GetTagsAsync();
-
-
-            return View(new ProductEditVM
+            foreach (var image in product.ProductImages)
             {
-                Id = dbProduct.Id,
-                Name = dbProduct.Name,
-                Description = dbProduct.Description,
-                Price = dbProduct.Price.ToString("0.#####").Replace(",", "."),
-                Rates = dbProduct.Rates,
-                SaleCount = dbProduct.SaleCount,
-                StockCount = dbProduct.StockCount,
-                Sku = dbProduct.Sku,
-                Information = dbProduct.Information,
-                Images = dbProduct.ProductImages,
-                ProductCategoriesId = dbProduct.ProductCategories.Select(pc => pc.CategoryId).ToList(),
-                ProductColorsId = dbProduct.ProductColors.Select(pc => pc.ColorId).ToList(),
-                ProductSizeId = dbProduct.ProductSize.Select(ps => ps.SizeId).ToList(),
-                ProductTagsId = dbProduct.ProductTags.Select(pt => pt.TagId).ToList(),
-
-            });
+                images.Add(image.Image);
+            }
 
 
+            List<string> tags = new List<string>();
 
+            foreach (var tag in product.ProductTags.Select(pt => pt.Tag))
+            {
+                tags.Add(tag.Name);
+            }
+
+
+            List<string> categories = new List<string>();
+
+            foreach (var category in product.ProductCategories.Select(pt => pt.Category))
+            {
+                categories.Add(category.Name);
+            }
+
+
+            List<string> sizes = new List<string>();
+
+            foreach (var size in product.ProductSize.Select(pt => pt.Size))
+            {
+                sizes.Add(size.Name);
+            }
+
+            List<string> colors = new List<string>();
+
+            foreach (var color in product.ProductColors.Select(pt => pt.Color))
+            {
+                colors.Add(color.Name);
+            }
+
+            ProductDetailsVM model = new ProductDetailsVM
+            {
+                Name = product.Name,
+                Price = product.Price,
+                Description = product.Description,
+                SaleCount = product.SaleCount,
+                StockCount = product.StockCount,
+                SKU = product.Sku,
+                Rating = product.Rates,
+                Images = images,
+                Categories = categories,
+                ColorName = colors,
+                Tags = tags,
+                Sizes = sizes,
+                CreatedAt = product.Created,
+                UpdatedAt = product.Updated
+            };
+
+            return View(model);
         }
-
 
 
 

@@ -1,0 +1,55 @@
+﻿@model List<SizeIndexVM>
+
+
+@{
+    ViewData["Title"] = "size";
+}
+
+
+<div class="container my-5">
+    <a class="btn btn-success" style="float: right;" asp-action="Create">Create</a>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+
+                    <th>
+                        Operations
+
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var size in Model)
+                {
+                    <tr>
+                        <td>
+                            @size.Name
+                        </td>
+
+
+                        <td>
+
+                            <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@size.Id">Edit</a>
+                            <form style="display: inline-block;" asp-action="Delete" asp-route-id="@size.Id" method="post">
+                                <button type="submit" class="btn btn-outline-danger">Delete</button>
+                            </form>
+
+                        </td>
+
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+

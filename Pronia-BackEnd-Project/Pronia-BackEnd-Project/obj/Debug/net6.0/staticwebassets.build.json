@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "iTy66kkr2iuu6T7JoJcru9kEYwf6J6opSJHFohXxw4M=",
+  "Hash": "FMy7LMpqCw+QZXr9IV+5i8qxY9KYz6dIIMeoH3gneko=",
   "Source": "Pronia-BackEnd-Project",
   "BasePath": "_content/Pronia-BackEnd-Project",
   "Mode": "Default",
@@ -4114,23 +4114,6 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\testimonial\\user\\3.png"
     },
     {
-      "Identity": "C:\\Users\\User-BT\\Desktop\\back-project\\Asp-End-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\wwwroot\\assets\\images\\website-images\\1.png",
-      "SourceId": "Pronia-BackEnd-Project",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User-BT\\Desktop\\back-project\\Asp-End-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\wwwroot\\",
-      "BasePath": "_content/Pronia-BackEnd-Project",
-      "RelativePath": "assets/images/website-images/1.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\1.png"
-    },
-    {
       "Identity": "C:\\Users\\User-BT\\Desktop\\back-project\\Asp-End-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\wwwroot\\assets\\images\\website-images\\1-1.jpg",
       "SourceId": "Pronia-BackEnd-Project",
       "SourceType": "Discovered",
@@ -4726,23 +4709,6 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\1-5-270x300.jpg"
     },
     {
-      "Identity": "C:\\Users\\User-BT\\Desktop\\back-project\\Asp-End-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\wwwroot\\assets\\images\\website-images\\1578a17b-667c-47ff-bd67-f9b49caa3394_1-1-570x633.jpg",
-      "SourceId": "Pronia-BackEnd-Project",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User-BT\\Desktop\\back-project\\Asp-End-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\wwwroot\\",
-      "BasePath": "_content/Pronia-BackEnd-Project",
-      "RelativePath": "assets/images/website-images/1578a17b-667c-47ff-bd67-f9b49caa3394_1-1-570x633.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\1578a17b-667c-47ff-bd67-f9b49caa3394_1-1-570x633.jpg"
-    },
-    {
       "Identity": "C:\\Users\\User-BT\\Desktop\\back-project\\Asp-End-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\wwwroot\\assets\\images\\website-images\\1-6-270x300.jpg",
       "SourceId": "Pronia-BackEnd-Project",
       "SourceType": "Discovered",
@@ -4998,23 +4964,6 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\card.png"
     },
     {
-      "Identity": "C:\\Users\\User-BT\\Desktop\\back-project\\Asp-End-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\wwwroot\\assets\\images\\website-images\\cbceeddc-0b60-47b6-8894-792990f1abf6_service.png",
-      "SourceId": "Pronia-BackEnd-Project",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User-BT\\Desktop\\back-project\\Asp-End-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\wwwroot\\",
-      "BasePath": "_content/Pronia-BackEnd-Project",
-      "RelativePath": "assets/images/website-images/cbceeddc-0b60-47b6-8894-792990f1abf6_service.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\cbceeddc-0b60-47b6-8894-792990f1abf6_service.png"
-    },
-    {
       "Identity": "C:\\Users\\User-BT\\Desktop\\back-project\\Asp-End-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\wwwroot\\assets\\images\\website-images\\dark.png",
       "SourceId": "Pronia-BackEnd-Project",
       "SourceType": "Discovered",
@@ -5030,23 +4979,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\dark.png"
-    },
-    {
-      "Identity": "C:\\Users\\User-BT\\Desktop\\back-project\\Asp-End-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\wwwroot\\assets\\images\\website-images\\e397258b-643c-44cd-be11-246eedc685b9_1-1-768x546.webp",
-      "SourceId": "Pronia-BackEnd-Project",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\User-BT\\Desktop\\back-project\\Asp-End-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\wwwroot\\",
-      "BasePath": "_content/Pronia-BackEnd-Project",
-      "RelativePath": "assets/images/website-images/e397258b-643c-44cd-be11-246eedc685b9_1-1-768x546.webp",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\website-images\\e397258b-643c-44cd-be11-246eedc685b9_1-1-768x546.webp"
     },
     {
       "Identity": "C:\\Users\\User-BT\\Desktop\\back-project\\Asp-End-Project\\Pronia-BackEnd-Project\\Pronia-BackEnd-Project\\wwwroot\\assets\\images\\website-images\\quotation.png",

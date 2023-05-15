@@ -1,13 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Pronia_BackEnd_Project.Areas.Admin.ViewModels;
 using Pronia_BackEnd_Project.Data;
 using Pronia_BackEnd_Project.Helpers;
+using Pronia_BackEnd_Project.Helpers.Enums;
 using Pronia_BackEnd_Project.Models;
 using Pronia_BackEnd_Project.Services;
 using Pronia_BackEnd_Project.Services.Interfaces;
 
 namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "SuperAdmin,Admin")]
     [Area("Admin")]
     public class TeamController : Controller
     {
@@ -26,6 +30,7 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             IEnumerable<Team> teams = await _teamService.GetAllAsync();
+
             return View(teams);
 
         }
@@ -57,7 +62,7 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
             }
 
 
-            if (model.Photo.CheckFileSize(200))
+            if (!model.Photo.CheckFileSize(200))
             {
 
                 ModelState.AddModelError("Photo", "Photo size must be max 200Kb");
@@ -88,127 +93,156 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
         }
 
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            try
+            {
+                if (id == null) return BadRequest();
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    Client client = await _clientService.GetFullDataByIdAsync(id);
+                Team team = await _context.Teams.FirstOrDefaultAsync(m => m.Id == id);
 
-        //    _context.Clients.Remove(client);
+                if (team is null) return NotFound();
 
-        //    string path = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", client.Image);
+                string path = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", team.Image);
 
-        //    FileHelper.DeleteFile(path);
+                FileHelper.DeleteFile(path);
 
-        //    await _context.SaveChangesAsync();
+                _context.Teams.Remove(team);
 
-        //    return RedirectToAction(nameof(Index));
-        //}
+                await _context.SaveChangesAsync();
 
-        //[HttpGet]
-        //public async Task<IActionResult> Edit(int id)
-        //{
-        //    Client client = await _clientService.GetFullDataByIdAsync(id);
+                return RedirectToAction(nameof(Index));
 
-        //    ClientEditVM model = new()
-        //    {
-        //        Name = client.Name,
-        //        Description = client.Description,
-        //        Image = client.Image
-        //    };
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null) return BadRequest();
 
-        //    return View(model);
-        //}
+            Team team = await _context.Teams.FirstOrDefaultAsync(m => m.Id == id);
 
+            if (team is null) return NotFound();
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, ClientEditVM model)
-        //{
-        //    if (id == null) return BadRequest();
+            TeamEditVM model = new()
+            {
+                Id = team.Id,
+                Name = team.Name,
+                Position = team.Position,
+                Image = team.Image
+            };
 
-        //    Client dbClient = await _context.Clients.AsNoTracking().FirstOrDefaultAsync(m => m.Id == id);
+            return View(model);
 
-        //    if (dbClient == null) return NotFound();
-
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(model);
-        //    }
-
-        //    if (model.Photo != null)
-        //    {
-        //        if (!model.Photo.CheckFileType("image/"))
-        //        {
-        //            ModelState.AddModelError("Photo", "File type must be image");
-        //            return View(model);
-        //        }
-
-        //        if (model.Photo.CheckFileSize(200))
-        //        {
-        //            ModelState.AddModelError("Photo", "Photo size must be max 200Kb");
-        //            return View(model);
-        //        }
-
-        //        string fileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+        }
 
 
-        //        string path = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", fileName);
+        [HttpGet]
+        public async Task<IActionResult> Detail(int? id)
+        {
+            if (id == null) return BadRequest();
 
+            Team team = await _context.Teams.FirstOrDefaultAsync(m => m.Id == id);
 
-        //        using (FileStream stream = new(path, FileMode.Create))
-        //        {
-        //            await model.Photo.CopyToAsync(stream);
-        //        }
+            if (team == null) return NotFound();
 
+            return View(team);
 
-        //        string expath = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", dbClient.Image);
-
-
-        //        FileHelper.DeleteFile(expath);
-
-        //        dbClient.Image = fileName;
-        //    }
-        //    else
-        //    {
-        //        dbClient.Photo = dbClient.Photo;
-        //    }
-
-
-        //    dbClient.Name = model.Name;
-        //    dbClient.Description = model.Description;
-
-
-        //    _context.Clients.Update(dbClient);
-
-        //    await _context.SaveChangesAsync();
-
-        //    return RedirectToAction(nameof(Index));
-        //}
+        }
 
 
 
-        //[HttpGet]
-        //public async Task<IActionResult> Detail(int id)
-        //{
-        //    if (id == null) return BadRequest();
 
-        //    Client client = await _clientService.GetFullDataByIdAsync(id);
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int? id, TeamEditVM team)
+        {
 
-        //    if (client == null) return NotFound();
+            try
+            {
+                if (id == null) return BadRequest();
 
-        //    ClientDetailVM model = new()
-        //    {
-        //        Name = client.Name,
-        //        Description = client.Description,
-        //        Image = client.Image,
+                Team dbTeam = await _context.Teams.FirstOrDefaultAsync(m => m.Id == id);
 
-        //    };
+                if (team is null) return NotFound();
 
-        //    return View(model);
-        //}
+                if (!ModelState.IsValid)
+                {
+                    team.Image = dbTeam.Image;
+
+                    return View(team);
+                }
+
+
+                TeamEditVM model = new()
+                {
+                    Id = team.Id,
+                    Name = team.Name,
+                    Position = team.Position,
+                    Image = team.Image
+                };
+
+                if (team.Photo != null)
+                {
+                    if (!team.Photo.CheckFileType("image/"))
+                    {
+                        ModelState.AddModelError("Photo", "File type must be image");
+                        return View(dbTeam);
+                    }
+
+                    if (!team.Photo.CheckFileSize(200))
+                    {
+                        ModelState.AddModelError("Photo", "Image size must be max 200kb");
+                        return View(dbTeam);
+                    }
+
+                    string oldPath = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", dbTeam.Image);
+
+                    FileHelper.DeleteFile(oldPath);
+
+                    string fileName = Guid.NewGuid().ToString() + "-" + team.Photo.FileName;
+
+                    string newPath = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", fileName);
+
+                    await FileHelper.SaveFileAsync(newPath, team.Photo);
+
+                    dbTeam.Image = fileName;
+                }
+                else
+                {
+                    Team newTeam = new()
+                    {
+                        Image = dbTeam.Image
+                    };
+                }
+
+                dbTeam.Name = team.Name;
+                dbTeam.Position = dbTeam.Position;
+
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+        }
+
+
+
+
 
 
 

@@ -70,11 +70,11 @@ namespace Pronia_BackEnd_Project.Controllers
             }
 
 
-            IEnumerable<Product> dbproducts = await _productService.GetPaginatedDatas(page, take); //page ve take gonderirik icine hemin methoda yazilibdi Servicde orda qebul edecik 
+            IEnumerable<Product> dbproducts = await _productService.GetPaginatedDatas(page, take); 
 
-            //IEnumerable<Product> products = await _productService.GetAllAsync();
+            
 
-            Paginate<Product> paginatedDatas = new(dbproducts, page, pageCount);  /// methodumuz bir generice cixartmisiq Paginate bunda her yerde istifade edecik methoda bizden 1 ci datani isdeyir mappedDatas, 2 ci page yeni curet page  3 cu ise totalPage paglerin sayini gosderen methodu gonderirik icine
+            Paginate<Product> paginatedDatas = new(dbproducts, page, pageCount);  
 
 
             ShopVM model = new()
@@ -135,6 +135,8 @@ namespace Pronia_BackEnd_Project.Controllers
 
             IEnumerable<Advertising> advertisings = await _advertisingService.GetAllAsync();
 
+            IEnumerable<Product> products = await _productService.GetAllAsync();
+
             Product product = await _productService.GetFullDataByIdAsync((int)id);
 
             if (product is null) return NotFound();
@@ -156,7 +158,8 @@ namespace Pronia_BackEnd_Project.Controllers
                 ProductColors = product.ProductColors,
                 ProductSize = product.ProductSize,
                 ProductTags = product.ProductTags,
-                Advertisings = advertisings
+                Advertisings = advertisings,
+                Product = products
                
 
             });
@@ -176,7 +179,7 @@ namespace Pronia_BackEnd_Project.Controllers
 
             ViewBag.cateId=id;
 
-            //IEnumerable<Product> dbproducts = await _productService.GetPaginatedDatas(page, take);
+           
 
             int pageCount = await GetPageCounByCategoryIdtAsync(take, id);
 

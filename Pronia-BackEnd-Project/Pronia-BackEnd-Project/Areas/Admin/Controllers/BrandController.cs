@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.ContentModel;
 using Pronia_BackEnd_Project.Areas.Admin.ViewModels;
@@ -10,7 +11,7 @@ using Pronia_BackEnd_Project.Services.Interfaces;
 
 namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 {
-
+    [Authorize(Roles = "SuperAdmin,Admin")]
     [Area("Admin")]
     public class BrandController : Controller
     {
@@ -262,7 +263,7 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
             catch (Exception ex)
             {
 
-                return RedirectToAction("Error", new { msj = ex.Message }); // eror mesajimizi diger seyfeye yoneldir "Error" yazdiqimiz indexe yoneldir
+                return RedirectToAction("Error", new { msj = ex.Message }); 
             }
 
 
@@ -272,9 +273,9 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
 
 
-        public IActionResult Error(string msj) // RedirectToAction("Error", new { msj = ex.Message }); gonderdiyimiz parametiri qebul edirik
+        public IActionResult Error(string msj) 
         {
-            ViewBag.error = msj; //viewbag ile gonderirik datani erroun indexine orda qebul edecik
+            ViewBag.error = msj; 
             return View();
         }
 

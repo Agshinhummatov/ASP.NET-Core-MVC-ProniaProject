@@ -1,13 +1,89 @@
-﻿@model ProductEditVM
+﻿@model ProductDetailsVM
 
 @{
-    ViewData["Title"] = "Detail";
+    ViewBag.Title = "Product Details";
 }
 
-<h1>Details</h1>
+<div class="container my-5">
 
+    @foreach (var image in Model.Images)
+    {
+        <img class="mb-3" style="width: 300px; height: 300px; border-radius: unset; object-fit: cover" src="~/assets/images/website-images//@image" />
+    }
 
+    <div class="mb-3">
+        <label asp-for="Name"></label>
+        <input class="form-control" disabled asp-for="Name">
+    </div>
 
+    <div class="mb-3">
+        <label asp-for="Price"></label>
+        <input class="form-control" disabled asp-for="Price">
+    </div>
 
+    <div class="mb-3">
+        <label asp-for="Description"></label>
+        <input class="form-control" disabled asp-for="Description">
+    </div>
 
+    <div class="mb-3">
+        <label>Sale Count</label>
+        <input class="form-control" disabled asp-for="SaleCount">
+    </div>
 
+    <div class="mb-3">
+        <label>Stock Count</label>
+        <input class="form-control" disabled asp-for="StockCount">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="SKU"></label>
+        <input class="form-control" disabled asp-for="SKU">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Rating"></label>
+        <input class="form-control" disabled asp-for="Rating">
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Categories"></label>
+        @foreach (var category in Model.Categories)
+        {
+                <input class="form-control" disabled value="@category">
+        }
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Tags"></label>
+        @foreach (var tag in Model.Tags)
+        {
+                <input class="form-control" disabled value="@tag">
+        }
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Sizes"></label>
+        @foreach (var size in Model.Sizes)
+        {
+                <input class="form-control" disabled value="@size">
+        }
+    </div>
+
+    <div class="mb-3">
+        <label>Color</label>
+        <input class="form-control" disabled asp-for="ColorName">
+    </div>
+
+    <div class="mb-3">
+        <label>Create Time</label>
+        <input class="form-control" disabled asp-for="CreatedAt">
+    </div>
+
+    <div class="mb-3">
+        <label>Update Time</label>
+        <input class="form-control" disabled asp-for="UpdatedAt">
+    </div>
+
+    <a class="btn mt-5" style="color: white;background-color: gray" asp-area="Admin" asp-controller="Product" asp-action="Index">Back</a>
+</div>

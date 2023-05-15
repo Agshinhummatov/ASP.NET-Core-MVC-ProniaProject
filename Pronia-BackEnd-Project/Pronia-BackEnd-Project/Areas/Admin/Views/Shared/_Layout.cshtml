@@ -180,12 +180,7 @@
                             <span class="menu-title">Dashboard</span>
                         </a>
                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" asp-area="Admin" asp-controller="Banner" asp-action="Index">
-                            <i class="mdi mdi-home menu-icon"></i>
-                            <span class="menu-title">Banner</span>
-                        </a>
-                    </li>
+                  
 
                       <li class="nav-item">
                         <a class="nav-link" asp-area="Admin" asp-controller="Advertising" asp-action="Index">
@@ -201,7 +196,18 @@
                         </a>
                     </li>
 
-                     <li class="nav-item">
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Admin" asp-controller="Contact" asp-action="Index">
+                            <i class="mdi mdi-home menu-icon"></i>
+                            <span class="menu-title">Contact</span>
+                        </a>
+                    </li>
+
+
+
+
+                    <li class="nav-item">
                         <a class="nav-link" asp-area="Admin" asp-controller="Client" asp-action="Index">
                             <i class="mdi mdi-home menu-icon"></i>
                             <span class="menu-title">Client</span>
@@ -223,7 +229,12 @@
                     </li>
 
                  
-                  
+                     <li class="nav-item">
+                        <a class="nav-link" asp-area="Admin" asp-controller="Banner" asp-action="Index">
+                            <i class="mdi mdi-home menu-icon"></i>
+                            <span class="menu-title">Banner</span>
+                        </a>
+                    </li>
                   
                    
                     <li class="nav-item">
@@ -254,36 +265,34 @@
                         </a>
                     </li>
 
+
+
                     <li class="nav-item">
                         <a class="nav-link" asp-area="Admin" asp-controller="Color" asp-action="Index">
                             <i class="mdi mdi-view-headline menu-icon"></i>
                             <span class="menu-title">Color</span>
                         </a>
                     </li>
-                   
+
 
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                            <i class="mdi mdi-account menu-icon"></i>
-                            <span class="menu-title">User Pages</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="auth">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/login-2.html"> Login 2 </a></li>
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/register-2.html"> Register 2 </a></li>
-                                <li class="nav-item"> <a class="nav-link" href="pages/samples/lock-screen.html"> Lockscreen </a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="documentation/documentation.html">
-                            <i class="mdi mdi-file-document-box-outline menu-icon"></i>
-                            <span class="menu-title">Documentation</span>
+                        <a class="nav-link" asp-area="Admin" asp-controller="Size" asp-action="Index">
+                            <i class="mdi mdi-view-headline menu-icon"></i>
+                            <span class="menu-title">Size</span>
                         </a>
                     </li>
+
+
+                     <li class="nav-item">
+                        <a class="nav-link" asp-area="Admin" asp-controller="Tag" asp-action="Index">
+                            <i class="mdi mdi-view-headline menu-icon"></i>
+                           <span class="menu-title">Tag</span>
+                        </a>
+                    </li>
+
+
+                    
+                 
                 </ul>
             </nav>
             <!-- partial -->

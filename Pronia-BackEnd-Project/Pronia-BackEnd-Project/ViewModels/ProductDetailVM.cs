@@ -26,6 +26,7 @@ namespace Pronia_BackEnd_Project.ViewModels
 
         public ICollection<ProductImage> ProductImages { get; set; }
 
+        public IEnumerable<Product> Product { get; set; }
 
         public ICollection<ProductColor> ProductColors { get; set; }
         public ICollection<ProductCategory> ProductCategories { get; set; }

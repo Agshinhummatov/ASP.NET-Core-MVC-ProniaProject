@@ -1,0 +1,38 @@
+﻿@model TeamEditVM
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container my-5">
+
+    <h1 style="color:darkcyan;">Team edit</h1>
+
+
+
+    <form class="form-sample" asp-action="Edit" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data">
+
+        <h4 class="my-3">Image</h4>
+        <div class="slider-content my-5">
+            <img style="width:400px; height:200px;" src="~/assets/images/website-images/@Model.Image" />
+        </div>
+
+        <input class="form-control" id="customFile" asp-for="Photo" />
+        <span class="text-danger" asp-validation-for="Photo"></span>
+
+        <h4 class="my-3">Name</h4>
+        <input type="text" class="form-control" id="customFile" asp-for="Name" />
+        <span class="text-danger" asp-validation-for="Name"></span>
+
+        <h4 class="my-3">Position</h4>
+        <input type="text" class="form-control" id="customFile" asp-for="Position" />
+        <span class="text-danger" asp-validation-for="Position"></span>
+
+        <div class="buttons my-3">
+            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+            <a class="btn btn-light" asp-action="Index">Cancel</a>
+        </div>
+
+    </form>
+
+</div>

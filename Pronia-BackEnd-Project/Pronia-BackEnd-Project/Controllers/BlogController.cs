@@ -79,8 +79,8 @@ namespace Pronia_BackEnd_Project.Controllers
 
         private async Task<int> GetPageCountAsync(int take)
         {
-            var productCount = await _blogService.GetCountAsync();  // bu methoda mene productlarin countunu verir
-            return (int)Math.Ceiling((decimal)productCount / take);     /// burda bolurki  product conutumzun nece dene take edirikse o qederde gosdersin yeni asqqidaki 1 2 3 yazir onlarin sayini tapmaq ucun 
+            var productCount = await _blogService.GetCountAsync();  
+            return (int)Math.Ceiling((decimal)productCount / take);     
 
 
         }
@@ -110,7 +110,7 @@ namespace Pronia_BackEnd_Project.Controllers
 
            
 
-            return View(new BlogDetailVM   // view gonderirik bunlari 
+            return View(new BlogDetailVM   
             {
 
                 Id = blog.Id,

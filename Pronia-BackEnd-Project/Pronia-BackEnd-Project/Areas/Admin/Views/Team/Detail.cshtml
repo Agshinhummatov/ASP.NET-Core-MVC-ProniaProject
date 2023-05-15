@@ -1,0 +1,26 @@
+﻿@model Team
+
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<div class="container my-5">
+
+    <h1 style="color:darkcyan;">Team detail</h1>
+
+    <div class="client-content mt-5">
+        <h4 style="color:darkred" class="my-3">Image</h4>
+        <img style="width:400px; height:200px;" src="~/assets/images/website-images/@Model.Image" />
+    </div>
+
+    <h4 style="color:darkred;" class="my-3">Name</h4>
+    <input type="text" class="form-control" id="customFile" asp-for="Name" disabled="disabled" />
+
+    <h4 style="color:darkred" class="my-3">Position</h4>
+    <input type="text" class="form-control" id="customFile" asp-for="Position" disabled="disabled" />
+
+    <a class="btn btn-info mt-3" asp-action="Index">
+        Back
+    </a>
+
+</div>

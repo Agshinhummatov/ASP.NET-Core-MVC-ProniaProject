@@ -47,7 +47,7 @@ namespace Pronia_BackEnd_Project.Data
 
         public DbSet<Settings> Settings { get; set; }
 
-
+        public DbSet<Contact> Contacts { get; set; }
 
     }
 }

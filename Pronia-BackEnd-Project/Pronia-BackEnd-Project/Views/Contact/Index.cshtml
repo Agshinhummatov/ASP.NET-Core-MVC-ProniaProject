@@ -1,10 +1,18 @@
-﻿
+﻿@model ContactVM
+
 @{
     ViewData["Title"] = "Contact";
 }
 
 
 <!-- Begin Main Content Area -->
+
+
+
+
+
+
+
 <main class="main-content">
     <div class="breadcrumb-area breadcrumb-height"
          data-bg-image="assets/images/breadcrumb/bg/1-1-1919x388.jpg">
@@ -53,39 +61,36 @@
                         </div>
                         <form id="contact-form"
                               class="contact-form"
-                              action="https://whizthemes.com/mail-php/mamunur/pronia/pronia.php">
+                              asp-controller="Contact"
+                              asp-action="Index" method="post">
                             <div class="group-input">
                                 <div class="form-field me-lg-30 mb-35 mb-lg-0">
-                                    <input type="text"
-                                           name="con_firstName"
-                                           placeholder="First Name*"
-                                           class="input-field" />
+                                    <input type="text" placeholder="First Name*" class="input-field" asp-for="FirstName" />
+                                    <span class="text-danger" asp-validation-for="FirstName"></span>
                                 </div>
                                 <div class="form-field mb-35">
-                                    <input type="text"
-                                           name="con_lastName"
-                                           placeholder="Last Name*"
-                                           class="input-field" />
+                                    <input type="text" placeholder="Last Name*" class="input-field" asp-for="LastName" />
+                                    <span class="text-danger" asp-validation-for="LastName"></span>
                                 </div>
                             </div>
                             <div class="group-input mb-35">
                                 <div class="form-field me-lg-30 mb-35 mb-lg-0">
-                                    <input type="text"
-                                           name="con_phone"
-                                           placeholder="Phone*"
-                                           class="input-field" />
+                                    <input type="text" placeholder="Phone*" class="input-field" asp-for="Phone" />
+                                    <span class="text-danger" asp-validation-for="Phone"></span>
                                 </div>
                                 <div class="form-field">
                                     <input type="text"
-                                           name="con_email"
                                            placeholder="Email*"
-                                           class="input-field" />
+                                           class="input-field"
+                                           asp-for="Email" />
+                                    <span class="text-danger" asp-validation-for="Email"></span>
                                 </div>
                             </div>
                             <div class="form-field mb-5">
-                                <textarea name="con_message"
-                                          placeholder="Message"
-                                          class="textarea-field"></textarea>
+                                <textarea placeholder="Message"
+                                          class="textarea-field"
+                                          asp-for="Message"></textarea>
+                                <span class="text-danger" asp-validation-for="Message"></span>
                             </div>
                             <div class="contact-button-wrap">
                                 <button type="submit"
@@ -110,4 +115,5 @@
         </div>
     </div>
 </main>
+
 <!-- Main Content Area End Here -->

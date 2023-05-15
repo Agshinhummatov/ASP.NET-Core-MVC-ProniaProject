@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Pronia_BackEnd_Project.Helpers.Enums;
 using Pronia_BackEnd_Project.Models;
 using Pronia_BackEnd_Project.Services.Interfaces;
 using Pronia_BackEnd_Project.ViewModels.Account;
@@ -8,19 +9,20 @@ namespace Pronia_BackEnd_Project.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<AppUser> _userManager; // user crate etmek ucundur
+        private readonly UserManager<AppUser> _userManager; 
 
-        private readonly SignInManager<AppUser> _signInManager; //  sayita giris etmek logout olmaq ucun istifade olunur
+        private readonly SignInManager<AppUser> _signInManager; 
 
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IEmailService _emailService;
 
         public AccountController(UserManager<AppUser> userManager,
-                               SignInManager<AppUser> signInManager, IEmailService emailService)
+                               SignInManager<AppUser> signInManager, IEmailService emailService, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailService = emailService;
-
+            _roleManager = roleManager;
         }
 
 
@@ -50,7 +52,7 @@ namespace Pronia_BackEnd_Project.Controllers
                
                 
 
-                //FullName = model.FullName,
+                
             };
 
             IdentityResult result = await _userManager.CreateAsync(newUser, model.Password); 
@@ -66,8 +68,9 @@ namespace Pronia_BackEnd_Project.Controllers
                 return View(model);
             }
 
-           
 
+
+            await _userManager.AddToRoleAsync(newUser, Roles.Member.ToString());
 
             string token = await _userManager.GenerateEmailConfirmationTokenAsync(newUser);
 
@@ -96,7 +99,7 @@ namespace Pronia_BackEnd_Project.Controllers
         }
 
 
-        public async Task<IActionResult> ConfirmEmail(string userId, string token)  //maile mesaj gelirki confrim ele hemin confrim edende bu methoda r equset gelir
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)  
         {
             if (userId == null || token == null) return BadRequest();
 
@@ -106,12 +109,12 @@ namespace Pronia_BackEnd_Project.Controllers
 
             await _userManager.ConfirmEmailAsync(user, token);
 
-            await _signInManager.SignInAsync(user, false); // burda deyiremki confirim olanda wep sayita girsin
+            await _signInManager.SignInAsync(user, false); 
 
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult VerifyEmail()  // emailde alert cixartsin deye yaziriq bu yeni adam gelir click edir registir olur ona mesaj cixsinki get emailde confirim et
+        public IActionResult VerifyEmail()  
         {
             return View();
         }
@@ -136,17 +139,17 @@ namespace Pronia_BackEnd_Project.Controllers
                 return View(model);
             }
 
-            AppUser user = await _userManager.FindByEmailAsync(model.EmailOrUsername);  // burda yoxlayirki email ila daxil olubdu
+            AppUser user = await _userManager.FindByEmailAsync(model.EmailOrUsername);  
 
-            if (user is null)  // eger tapa bilmedise nuldusa girir serti yoxlayir
+            if (user is null)  
             {
-                user = await _userManager.FindByNameAsync(model.EmailOrUsername);  // burda yoxlayirki username ile daxil olubdu
+                user = await _userManager.FindByNameAsync(model.EmailOrUsername);  
 
             }
 
             if (user is null)
             {
-                ModelState.AddModelError(string.Empty, "Email or password is wrong");  // eger bele bir email tapilmasa bu eroro cixart
+                ModelState.AddModelError(string.Empty, "Email or password is wrong");  
                 return View(model);
             }
 
@@ -154,7 +157,7 @@ namespace Pronia_BackEnd_Project.Controllers
 
             if (!result.Succeeded)
             {
-                ModelState.AddModelError(string.Empty, "Email or password is wrong");  // eger bele succesd deyilse bu eroro cixart
+                ModelState.AddModelError(string.Empty, "Email or password is wrong");  
                 return View(model);
 
             }
@@ -168,8 +171,25 @@ namespace Pronia_BackEnd_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            await _signInManager.SignOutAsync();  // bu deyirki gedib logouta clicik edende bu methodu islet yeni cixsin logout etsin
+            await _signInManager.SignOutAsync();  
             return RedirectToAction("Index", "Home");
         }
+
+
+
+
+        public async Task CreateRole()
+        {
+            foreach (var role in Enum.GetValues(typeof(Roles)))
+            {
+                if (!await _roleManager.RoleExistsAsync(role.ToString()))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole { Name = role.ToString() });
+                }
+            }
+        }
+
+
+
     }
 }

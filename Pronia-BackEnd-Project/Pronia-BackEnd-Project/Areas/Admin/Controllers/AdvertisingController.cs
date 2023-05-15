@@ -1,14 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Pronia_BackEnd_Project.Areas.Admin.ViewModels;
 using Pronia_BackEnd_Project.Data;
 using Pronia_BackEnd_Project.Helpers;
+using Pronia_BackEnd_Project.Helpers.Enums;
 using Pronia_BackEnd_Project.Models;
 using Pronia_BackEnd_Project.Services.Interfaces;
 
 namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 {
-
+    [Authorize(Roles = "SuperAdmin,Admin")]
     [Area("Admin")]
     public class AdvertisingController : Controller
     {

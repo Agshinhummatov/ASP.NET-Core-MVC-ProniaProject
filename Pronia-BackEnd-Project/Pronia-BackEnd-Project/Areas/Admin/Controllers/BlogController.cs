@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Pronia_BackEnd_Project.Areas.Admin.ViewModels;
 using Pronia_BackEnd_Project.Data;
@@ -10,6 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "SuperAdmin,Admin")]
     [Area("Admin")]
     public class BlogController : Controller
     {
@@ -41,7 +43,7 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
             return View(paginatedDatas);
         }
 
-        //paglerin sayini veren method
+     
 
         private async Task<int> GetPageCountAsync(int take)
         {
@@ -49,7 +51,7 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
             return (int)Math.Ceiling((decimal)productCount / take);     
         }
 
-        // pasingation method 
+      
         private IEnumerable<BlogListVM> GetMappedDatas(IEnumerable<Blog> blogs)
         {
             List<BlogListVM> mappedDatas = new();
@@ -97,7 +99,7 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
                 if (!ModelState.IsValid)
                 {
-                    return View(model); //  is validi yoxlayirki bos olmasin ve view icine bize gelen model  gonderiki eger biri sehv olarsa inputlari bos saxlamasin
+                    return View(model);   
                 }
 
 
@@ -120,28 +122,27 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
                 }
 
-                List<BlogImage> blogImages = new();  // list yaradiriq  burda hemin listada asqi methoda add edecik imagleri
+                List<BlogImage> blogImages = new();  
 
                 foreach (var photo in model.Photos)
                 {
-                    string fileName = Guid.NewGuid().ToString() + "_" + photo.FileName; // Guid.NewGuid() bu neynir bir id kimi dusune birerik hemise ferqli herifler verir mene ki men sekilin name qoyanda o ferqli olsun tostring ele deyirem yeni random oalraq ferlqi ferqli sekil adi gelecek  ve  slider.Photo.FileName; ordan gelen ada birslerdir 
-
+                    string fileName = Guid.NewGuid().ToString() + "_" + photo.FileName; 
 
                     string path = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", fileName);
 
                     await FileHelper.SaveFileAsync(path, photo);
 
 
-                    BlogImage blogImage = new()   // bir bir sekileri goturur forech icinde
+                    BlogImage blogImage = new()   
                     {
                         Image = fileName
                     };
 
-                    blogImages.Add(blogImage); // yuxardaki  List<ProductImage> add edir sekileri yeni nece dene sekili varsa o qederde add edecek
+                    blogImages.Add(blogImage); 
 
                 }
 
-                blogImages.FirstOrDefault().IsMain = true; // bu neynir elimizdeki list var icinde imagler var gelir onlardan biricsin defaltunu ture edirki productlarda 1 ci sekili gosdersin
+                blogImages.FirstOrDefault().IsMain = true; 
 
               
 
@@ -153,7 +154,7 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
                     Images = blogImages  
                 };
 
-                await _context.BlogImages.AddRangeAsync(blogImages); // AddRangeAsync bu method bize listi yigir add edir 
+                await _context.BlogImages.AddRangeAsync(blogImages); 
                 await _context.Blogs.AddAsync(newBlog);
                 await _context.SaveChangesAsync();
 
@@ -238,11 +239,11 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
 
 
 
-                List<BlogImage> productImages = new();  // list yaradiriq  burda hemin listada asqi methoda add edecik imagleri
+                List<BlogImage> productImages = new();  
 
                 foreach (var photo in updatedProduct.Photos)
                 {
-                    string fileName = Guid.NewGuid().ToString() + "_" + photo.FileName; // Guid.NewGuid() bu neynir bir id kimi dusune birerik hemise ferqli herifler verir mene ki men sekilin name qoyanda o ferqli olsun tostring ele deyirem yeni random oalraq ferlqi ferqli sekil adi gelecek  ve  slider.Photo.FileName; ordan gelen ada birslerdir 
+                    string fileName = Guid.NewGuid().ToString() + "_" + photo.FileName; 
 
 
                     string path = FileHelper.GetFilePath(_env.WebRootPath, "assets/images/website-images", fileName);
@@ -250,12 +251,12 @@ namespace Pronia_BackEnd_Project.Areas.Admin.Controllers
                     await FileHelper.SaveFileAsync(path, photo);
 
 
-                    BlogImage productImage = new()   // bir bir sekileri goturur forech icinde
+                    BlogImage productImage = new()   
                     {
                         Image = fileName
                     };
 
-                    productImages.Add(productImage); // yuxardaki  List<ProductImage> add edir sekileri yeni nece dene sekili varsa o qederde add edecek
+                    productImages.Add(productImage); 
 
                 }
 

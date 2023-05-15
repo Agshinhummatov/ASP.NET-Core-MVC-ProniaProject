@@ -1,0 +1,72 @@
+﻿@model List<ContactIndexVM>
+
+
+@{
+    ViewData["Title"] = "Index";
+   
+}
+
+
+
+<div class="container my-5">
+   
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+
+                    <th >FirstName</th>
+                    <th >LastName</th>
+                    <th >Email</th>
+                  
+                    <th>
+                        Operations
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var contact in Model)
+                {
+
+                    <tr>
+
+
+
+                        <td class="cell">
+                            @contact.FirstName
+                        </td>
+                        <td class="cell">
+                            @contact.LastName
+                        </td>
+                        <td class="cell">
+                            @contact.Email
+                        </td>
+                        
+
+
+
+
+
+                        <td>
+
+                            <a class="btn btn-outline-info" asp-action="Detail" asp-route-id="@contact.Id">Info</a>
+                           
+
+                            <form style="display: inline-block;" asp-action="Delete" asp-route-id="@contact.Id" method="post">
+                                <button type="submit" class="btn btn-outline-danger">Delete</button>
+                            </form>
+
+
+                        </td>
+
+                    </tr>
+
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
